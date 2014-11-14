@@ -2,14 +2,13 @@ package controller;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.application.Platform;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -23,74 +22,25 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaPlayer.Status;
 import javafx.scene.media.MediaView;
-import javafx.scene.web.WebEngine;
-import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import application.ParseJsonYoutube;
 
-public class Controller_Main implements Initializable {
+public class Controller implements Initializable {
 	private boolean endOfMedia = false;
+	private String str;
 	private Media pick;
 	public MediaPlayer player;
 	private Duration duration;
 	private double volume;
-	String str;
-	String link = null;
-	private List<Item> list;
-	ObservableList<Item> observableList = FXCollections.observableArrayList();
-	private Stage stage = null;
-	private Scene scene;
-	private Pane pane;
 
-	/***********************************************************
-	 * 
-	 * 1. Ham khoi tao
-	 * 
-	 **********************************************************/
-	public Controller_Main () {
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/layout/LayoutMain.fxml"));
-		fxmlLoader.setController(this);
-		try {
-			pane = fxmlLoader.load();
-			scene = new Scene(pane);
-			scene.getStylesheets().add(getClass().getResource("/application/aMain.css").toExternalForm());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	public void launch(String str1, String str2) {
-		link = str2;
-		if (link != null) {
-			final WebEngine eng = idWebView.getEngine();
-			eng.load("https://www.youtube.com/v/8TBPdJHKZYo?version=3&f=videos&app=youtube_gdata");
-		}
-		Stage primaryStage = new Stage();
-		primaryStage.setTitle(str1);
-		Image iconSoftWare = new Image("/layout/iconMovie.png");
-		primaryStage.getIcons().add(iconSoftWare);
-		primaryStage.setScene(scene);
-		primaryStage.show();
-		System.out.println(str2);
-	}
-
-	/*****************************************************************
-	 * 
-	 * 2. Lap trinh su kien
-	 * 
-	 ****************************************************************/
 	@FXML
-	private TextField idSearchText;
+	private TextField idTF;
 	@FXML
 	private Button idSearch;
 	@FXML
@@ -115,12 +65,10 @@ public class Controller_Main implements Initializable {
 	private Label idTime;
 	@FXML
 	private Pane idPaneMedia;
-	@FXML
-	private WebView idWebView;
 
 	/************************************************************************************
 	 * 
-	 * 3. CONTROL MENU
+	 * CONTROL MENU
 	 * 
 	 *************************************************************************************/
 	@FXML
@@ -153,25 +101,16 @@ public class Controller_Main implements Initializable {
 	@FXML
 	private void mStop() {
 		player.stop();
-		idPlay.setText(">");
 	}
 
 	@FXML
 	private void mPlay() {
 		player.play();
-		idPlay.setText("||");
-
-		player.currentTimeProperty().addListener(new InvalidationListener() {
-			public void invalidated(Observable ov) {
-				updateTime();
-			}
-		});
 	}
 
 	@FXML
 	private void mPause() {
 		player.pause();
-		idPlay.setText(">");
 	}
 
 	@FXML
@@ -200,34 +139,34 @@ public class Controller_Main implements Initializable {
 	private void mCloseScene() {
 		Platform.exit();
 	}
-
+	
 	@FXML
 	private void mBalance1() {
 		player.setBalance(1.0);
 	}
-
+	
 	@FXML
 	private void mBalance2() {
 		player.setBalance(0.5);
 	}
-
+	
 	@FXML
 	private void mBalance3() {
 		player.setBalance(0.0);
 	}
-
+	
 	@FXML
 	private void mBalance4() {
 		player.setBalance(-0.5);
 	}
-
+	
 	@FXML
 	private void mBalance5() {
 		player.setBalance(-1.0);
 	}
 
 	@FXML
-	private void mAboutTeam() {
+	private void mAboutTeam()  {
 		AnchorPane root;
 		try {
 			root = FXMLLoader.load(getClass().getResource("/layout/Team.fxml"));
@@ -240,8 +179,127 @@ public class Controller_Main implements Initializable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+	}
+
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+
+		idSearch.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent arg0) {
+				/* cách lấy dữ liệu video trên mạng */
+				final String MEDIA_URL = "http://download.oracle.com/otndocs/products/javafx/oow2010-2.flv";
+				pick = new Media(MEDIA_URL);
+
+				/* cách lấy dữ liệu trong máy tính 			
+				str = idTF.getText();
+				str = "/application/" + str + ".mp3";
+				System.out.println(str);
+				URL resource = getClass().getResource(str);
+				pick = new Media(resource.toString());
+				*/
+				player = new MediaPlayer(pick);
+				player.setAutoPlay(true);
+				idMediaView.setMediaPlayer(player);
+
+				player.setVolume(0.5);
+				idPIn.setProgress(0.5);
+			}
+		});
+
+		idPlay.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent arg0) {
+
+				Status status = player.getStatus();
+				if (status == Status.UNKNOWN || status == Status.HALTED) {
+					// don't do anything in these states
+					return;
+				}
+
+				if (status == Status.PAUSED || status == Status.READY || status == Status.STOPPED) {
+					// rewind the movie if we're sitting at the end
+					player.play();
+				} else {
+					player.pause();
+				}
+			}
+		});
+		
+		idMediaView.setOnMouseClicked(new EventHandler<Event>() {
+
+			@Override
+			public void handle(Event arg0) {
+				Status status = player.getStatus();
+				if (status == Status.PAUSED || status == Status.READY || status == Status.STOPPED) {
+					player.play();
+				} else {
+					player.pause();
+				}
+			}
+	
+		});
+		
+		idStop.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				player.stop();
+				endOfMedia = true;
+			}
+		});
+
+		idFullScreen.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+			 
+			}
+		});
+
+
+		/******************************************************************************
+		 * 
+		 * Setup Volume
+		 *
+		 ******************************************************************************/
+		idVolumeDown.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent arg0) {
+				volume = player.getVolume() - 0.05;
+				player.setVolume(volume);
+				idPIn.setProgress(volume);
+			}
+		});
+
+		idVolumeUp.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent arg0) {
+				volume = player.getVolume() + 0.05;
+				player.setVolume(volume);
+				idPIn.setProgress(volume);
+			}
+		});
+
+		idMute.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				if (player.isMute() == true)
+					player.setMute(false);
+				else
+					player.setMute(true);
+			}
+		});
+		
+		
 
 	}
-	// viet vao day
-
 }
