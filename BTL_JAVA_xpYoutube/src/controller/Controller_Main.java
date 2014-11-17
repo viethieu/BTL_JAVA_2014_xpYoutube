@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import application.ParseJsonYoutube;
+import controller.Controller_Search;
 import javafx.application.Platform;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
@@ -22,6 +24,8 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
@@ -31,7 +35,7 @@ import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-public class Controller implements Initializable {
+public class Controller_Main implements Initializable {
 	private boolean endOfMedia = false;
 	private String str;
 	private Media pick;
@@ -40,7 +44,7 @@ public class Controller implements Initializable {
 	private double volume;
 
 	@FXML
-	private TextField idTF;
+	private TextField idSearchText;
 	@FXML
 	private Button idSearch;
 	@FXML
@@ -101,16 +105,25 @@ public class Controller implements Initializable {
 	@FXML
 	private void mStop() {
 		player.stop();
+		idPlay.setText(">");
 	}
 
 	@FXML
 	private void mPlay() {
 		player.play();
+		idPlay.setText("||");
+
+		player.currentTimeProperty().addListener(new InvalidationListener() {
+			public void invalidated(Observable ov) {
+				updateTime();
+			}
+		});
 	}
 
 	@FXML
 	private void mPause() {
 		player.pause();
+		idPlay.setText(">");
 	}
 
 	@FXML
@@ -139,37 +152,37 @@ public class Controller implements Initializable {
 	private void mCloseScene() {
 		Platform.exit();
 	}
-	
+
 	@FXML
 	private void mBalance1() {
 		player.setBalance(1.0);
 	}
-	
+
 	@FXML
 	private void mBalance2() {
 		player.setBalance(0.5);
 	}
-	
+
 	@FXML
 	private void mBalance3() {
 		player.setBalance(0.0);
 	}
-	
+
 	@FXML
 	private void mBalance4() {
 		player.setBalance(-0.5);
 	}
-	
+
 	@FXML
 	private void mBalance5() {
 		player.setBalance(-1.0);
 	}
 
 	@FXML
-	private void mAboutTeam()  {
+	private void mAboutTeam() {
 		AnchorPane root;
 		try {
-			root = FXMLLoader.load(getClass().getResource("/layout/Team.fxml"));
+			root = FXMLLoader.load(getClass().getResource("/giaoDien/Team.fxml"));
 			Scene scene = new Scene(root);
 			Stage primaryStage = new Stage();
 			primaryStage.setTitle("Imformation");
@@ -179,29 +192,46 @@ public class Controller implements Initializable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 	}
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
+		idSearchText.setOnKeyPressed(new EventHandler<KeyEvent>() {
+
+			@Override
+			public void handle(KeyEvent key) {
+				if (key.getCode().equals(KeyCode.ENTER)) {
+					str = idSearchText.getText();
+					System.out.println(str);
+					ParseJsonYoutube parser = new ParseJsonYoutube(str);
+					list = parser.ParseYoutube();
+					System.out.println(list);
+					
+					Controller_Search ctrl = new Controller_Search(list);
+					if (stage != null)
+						stage.close();
+					stage = ctrl.launch();
+				}
+			}
+		});
+		
 		idSearch.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
 			public void handle(ActionEvent arg0) {
-				/* cách lấy dữ liệu video trên mạng */
+				/* Cach lay video tren mang*/
 				final String MEDIA_URL = "http://download.oracle.com/otndocs/products/javafx/oow2010-2.flv";
 				pick = new Media(MEDIA_URL);
 
-				/* cách lấy dữ liệu trong máy tính 			
-				str = idTF.getText();
-				str = "/application/" + str + ".mp3";
-				System.out.println(str);
-				URL resource = getClass().getResource(str);
-				pick = new Media(resource.toString());
-				*/
+				/* Cach lay video trong may tinh*/			
+				//str = idSearchText.getText();
+				//str = "/application/" + str + ".mp3";
+				//URL resource = getClass().getResource(str);
+				//pick = new Media(resource.toString());
+
 				player = new MediaPlayer(pick);
-				player.setAutoPlay(true);
 				idMediaView.setMediaPlayer(player);
 
 				player.setVolume(0.5);
@@ -209,6 +239,7 @@ public class Controller implements Initializable {
 			}
 		});
 
+		//Su kien nut Play/Pause
 		idPlay.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent arg0) {
@@ -220,20 +251,45 @@ public class Controller implements Initializable {
 				}
 
 				if (status == Status.PAUSED || status == Status.READY || status == Status.STOPPED) {
-					// rewind the movie if we're sitting at the end
 					player.play();
 				} else {
 					player.pause();
 				}
+				
+				player.setOnPaused(new Runnable() {
+					public void run() {
+						idPlay.setText(">");
+					}
+				});
+
+				player.setOnPlaying(new Runnable() {
+					public void run() {
+						idPlay.setText("||");
+					}
+				});
+
+				// lap trinh cho thoi gian chay khi xem phim
+				duration = player.getMedia().getDuration();
+				player.currentTimeProperty().addListener(new InvalidationListener() {
+					public void invalidated(Observable ov) {
+						updateTime();
+					}
+				});
 			}
 		});
 		
+		//Su kien khi click vao man hinh
 		idMediaView.setOnMouseClicked(new EventHandler<Event>() {
 
 			@Override
 			public void handle(Event arg0) {
 				Status status = player.getStatus();
 				if (status == Status.PAUSED || status == Status.READY || status == Status.STOPPED) {
+					if (endOfMedia) {
+						player.seek(player.getStartTime()); // lấy thời gian tại
+															// lúc dừng
+						endOfMedia = false;
+					}
 					player.play();
 				} else {
 					player.pause();
@@ -242,16 +298,18 @@ public class Controller implements Initializable {
 	
 		});
 		
+		//Su kien nut Stop
 		idStop.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
 			public void handle(ActionEvent arg0) {
 				// TODO Auto-generated method stub
 				player.stop();
-				endOfMedia = true;
+				idPlay.setText(">");
 			}
 		});
 
+		//su kien nut thu phong man hinh
 		idFullScreen.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
@@ -261,6 +319,17 @@ public class Controller implements Initializable {
 			}
 		});
 
+		// Su kien khi keo thanh thoi gian
+				idSliderTime.valueProperty().addListener(new InvalidationListener() {
+
+					@Override
+					public void invalidated(Observable arg0) {
+						updateTime();
+						if (idSliderTime.isValueChanging()) {
+							player.seek(duration.multiply(idSliderTime.getValue() / 100.0));
+						}
+					}
+				});
 
 		/******************************************************************************
 		 * 
@@ -298,8 +367,43 @@ public class Controller implements Initializable {
 					player.setMute(true);
 			}
 		});
-		
-		
+	}
+	
+	protected void updateTime() {
+		if (idTime != null && idSliderTime != null) {
+			Platform.runLater(new Runnable() {
 
+				@SuppressWarnings("deprecation")
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					Duration currentTime = player.getCurrentTime();
+					idTime.setText(setLabelTime(currentTime, duration));
+					idSliderTime.setDisable(duration.isUnknown());
+					if (!idSliderTime.isDisable() && duration.greaterThan(Duration.ZERO)
+							&& !idSliderTime.isValueChanging()) {
+						idSliderTime.setValue(currentTime.divide(duration).toMillis() * 100);
+					}
+				}
+			});
+		}
+	}
+
+	private String setLabelTime(Duration count, Duration length) {
+		int intCount = (int) Math.floor(count.toSeconds());
+		int intCountH = intCount / 3600;
+		int intCountM = (intCount - intCountH * 3600) / 60;
+		int intCountS = intCount - intCountH * 3600 - intCountM * 60;
+
+		int intLength = (int) Math.floor(length.toSeconds());
+		int intLengthH = intLength / 3600;
+		int intLengthM = (intLength - intLengthH * 3600) / 60;
+		int intLengthS = intLength - intLengthH * 3600 - intLengthM * 60;
+
+		if (intLengthH > 0)
+			return String.format("%02d:%02d:%02d/%02d:%02d:%02d", intCountH, intCountM, intCountS, intLengthH,
+					intLengthM, intLengthS);
+		else
+			return String.format("%02d:%02d/%02d:%02d", intCountM, intCountS, intLengthM, intLengthS);
 	}
 }
