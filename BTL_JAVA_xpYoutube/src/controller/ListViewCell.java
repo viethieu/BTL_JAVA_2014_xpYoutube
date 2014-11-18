@@ -36,9 +36,21 @@ public class ListViewCell extends ListCell<Item> {
 
 			@Override
 			public void handle(MouseEvent click) {
-				if (click.getClickCount() == 2){
-					link = linkItem;
-					System.out.println(link);
+				if (click.getClickCount() == 2) {
+					Controller_Main ctrl = new Controller_Main();
+					String id = "";
+					int i, j;
+					for (i = 0; i < link.length(); i++) {
+						if (link.charAt(i) == 'v') {
+							for (j = i + 2; j < link.length(); j++) {
+								id += link.charAt(j);
+								if (link.charAt(j + 1) == '&')
+									break;
+							}
+						}
+
+					}
+					ctrl.launch(title, id);
 				}
 					
 			}
