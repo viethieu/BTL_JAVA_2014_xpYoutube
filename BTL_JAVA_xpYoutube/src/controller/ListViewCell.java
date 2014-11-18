@@ -24,7 +24,7 @@ public class ListViewCell extends ListCell<Item> {
 	Hyperlink hyperlink = new Hyperlink();
 	Pane pane = new Pane();
 	Image image;
-	String link, linkItem;
+	String link, title;
 
 	public ListViewCell() {
 		super();
@@ -62,8 +62,9 @@ public class ListViewCell extends ListCell<Item> {
 		super.updateItem(it, empty);
 		setText(null);
 		if (!empty) {
-			linkItem = it.getLink();
 
+			link = it.getLink();
+			title = it.getTitle();
 			label1.setText("  " + it.getTitle());
 			label1.setStyle("-fx-font-weight: bold;" + "-fx-font-size: 14px;" + "-fx-padding: 0 0 10 0;");
 			label2.setText("  " + it.getDate());
