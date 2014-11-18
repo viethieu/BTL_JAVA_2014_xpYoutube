@@ -77,7 +77,7 @@ public class Controller_Main implements Initializable {
 		link = str2;
 		if (link != null) {
 			final WebEngine eng = idWebView.getEngine();
-			eng.load("https://www.youtube.com/embed/8TBPdJHKZYo");
+			eng.load(link);
 		}
 		Stage primaryStage = new Stage();
 		primaryStage.setTitle(str1);
