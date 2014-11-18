@@ -39,6 +39,7 @@ public class ListViewCell extends ListCell<Item> {
 			public void handle(MouseEvent click) {
 				if (click.getClickCount() == 2){
 					Controller_Main ctrl = new Controller_Main();
+					
 					String id = "";
 					int i, j;
 					for (i = 0; i < link.length(); i++) {
@@ -49,7 +50,6 @@ public class ListViewCell extends ListCell<Item> {
 									break;
 							}
 						}
-
 					}
 					ctrl.launch(title, link);
 				}
