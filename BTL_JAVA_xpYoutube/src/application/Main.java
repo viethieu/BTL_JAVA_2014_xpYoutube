@@ -2,6 +2,7 @@ package application;
 
 import java.io.IOException;
 
+import controller.Controller_Main;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -14,8 +15,10 @@ public class Main extends Application {
 	
 	@Override
 	public void start(Stage primaryStage)  {
-	
-		try {
+		Controller_Main ctrl = new Controller_Main();
+		ctrl.launch("Xem phim youtube", null);
+		
+		/*try {
 				Pane root = FXMLLoader.load(getClass().getResource("/giaoDien/layoutMain.fxml"));
 				Scene scene = new Scene(root,600,400);
 				scene.getStylesheets().add(getClass().getResource("CssMain.css").toExternalForm());
@@ -27,7 +30,7 @@ public class Main extends Application {
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
+			}*/
 	}
 	
 	public static void main(String[] args) {

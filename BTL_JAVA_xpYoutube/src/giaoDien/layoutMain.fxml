@@ -8,7 +8,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Controller_Main">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <HBox prefHeight="26.0" prefWidth="600.0">
          <children>
@@ -61,8 +61,8 @@
       </HBox>
       <Pane fx:id="idPaneMedia" layoutY="26.0" style="-fx-background-color: #bfc2c7; -fx-position-shape: true;">
          <children>
+            <WebView fx:id="idWebView" layoutY="-1.0" prefHeight="308.0" prefWidth="600.0" />
             <MediaView fx:id="idMediaView" fitHeight="300.0" fitWidth="600.0" />
-            <WebView fx:id="idWebView" layoutY="-1.0" prefHeight="379.0" prefWidth="600.0" />
          </children>
       </Pane>
       <HBox layoutY="332.0" prefHeight="35.0" prefWidth="600.0" style="-fx-background-color: #7fffd4;">

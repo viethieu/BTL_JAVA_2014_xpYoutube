@@ -28,6 +28,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
@@ -36,6 +37,8 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaPlayer.Status;
 import javafx.scene.media.MediaView;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -53,6 +56,43 @@ public class Controller_Main implements Initializable {
 	private Scene scene;
 	private Pane pane;
 
+	/***********************************************************
+	 * 
+	 * 1. Hàm khởi tạo
+	 * 
+	 **********************************************************/
+	public Controller_Main () {
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/giaoDien/layoutMain.fxml"));
+		fxmlLoader.setController(this);
+		try {
+			pane = fxmlLoader.load();
+			scene = new Scene(pane);
+			scene.getStylesheets().add(getClass().getResource("/application/CssMain.css").toExternalForm());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void launch(String str1, String str2) {
+		link = str2;
+		if (link != null) {
+			final WebEngine eng = idWebView.getEngine();
+			eng.load("https://www.youtube.com/embed/8TBPdJHKZYo");
+		}
+		Stage primaryStage = new Stage();
+		primaryStage.setTitle(str1);
+		Image iconSoftWare = new Image("/giaoDien/iconMovie.png");
+		primaryStage.getIcons().add(iconSoftWare);
+		primaryStage.setScene(scene);
+		primaryStage.show();
+		System.out.println(str2);
+	}
+
+	/*****************************************************************
+	 * 
+	 * 2. Lập trình sự kiện
+	 * 
+	 ****************************************************************/
 	@FXML
 	private TextField idSearchText;
 	@FXML
@@ -79,10 +119,12 @@ public class Controller_Main implements Initializable {
 	private Label idTime;
 	@FXML
 	private Pane idPaneMedia;
-
+	@FXML
+	private WebView idWebView;
+	
 	/************************************************************************************
 	 * 
-	 * CONTROL MENU
+	 * 3. CONTROL MENU
 	 * 
 	 *************************************************************************************/
 	@FXML
@@ -205,6 +247,11 @@ public class Controller_Main implements Initializable {
 
 	}
 
+	/**********************************************************************************
+	 * 
+	 * 4. CÁC CONTROL KHÁC ĐƯỢC XỬ LÝ TRONG HÀM KHỞI TẠO initialize()
+	 * 
+	 **********************************************************************************/
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
@@ -227,6 +274,11 @@ public class Controller_Main implements Initializable {
 			}
 		});
 		
+		/*****************************************************************************
+		 * 
+		 *5. Lập trình sự kiện cho nút search Xử lý lấy địa chỉ link video ở đây
+		 * 
+		 *****************************************************************************/
 		idSearch.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
@@ -354,7 +406,7 @@ public class Controller_Main implements Initializable {
 
 		/******************************************************************************
 		 * 
-		 * Setup Volume
+		 * 6. Setup Volume
 		 *
 		 ******************************************************************************/
 		idVolumeDown.setOnAction(new EventHandler<ActionEvent>() {
@@ -389,7 +441,12 @@ public class Controller_Main implements Initializable {
 			}
 		});
 	}
-	
+
+	/*****************************************************************************
+	 * 
+	 * 7. Các hàm sử dụng cho việc update và hiển thị thời gian của video
+	 * 
+	 *****************************************************************************/
 	protected void updateTime() {
 		if (idTime != null && idSliderTime != null) {
 			Platform.runLater(new Runnable() {

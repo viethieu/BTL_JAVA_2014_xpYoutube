@@ -1,5 +1,6 @@
 package controller;
 
+import controller.Controller_Main;
 import javafx.event.EventHandler;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
@@ -24,7 +25,7 @@ public class ListViewCell extends ListCell<Item> {
 	Hyperlink hyperlink = new Hyperlink();
 	Pane pane = new Pane();
 	Image image;
-	String link, linkItem;
+	String link, title;
 
 	public ListViewCell() {
 		super();
@@ -37,8 +38,20 @@ public class ListViewCell extends ListCell<Item> {
 			@Override
 			public void handle(MouseEvent click) {
 				if (click.getClickCount() == 2){
-					link = linkItem;
-					System.out.println(link);
+					Controller_Main ctrl = new Controller_Main();
+					String id = "";
+					int i, j;
+					for (i = 0; i < link.length(); i++) {
+						if (link.charAt(i) == 'v') {
+							for (j = i + 2; j < link.length(); j++) {
+								id += link.charAt(j);
+								if (link.charAt(j + 1) == '&')
+									break;
+							}
+						}
+
+					}
+					ctrl.launch(title, link);
 				}
 					
 			}
@@ -50,7 +63,8 @@ public class ListViewCell extends ListCell<Item> {
 		super.updateItem(it, empty);
 		setText(null);
 		if (!empty) {
-			linkItem = it.getLink();
+			link = it.getLink();
+			title = it.getTitle();
 
 			label1.setText("  " + it.getTitle());
 			label1.setStyle("-fx-font-weight: bold;" + "-fx-font-size: 14px;" + "-fx-padding: 0 0 10 0;");
