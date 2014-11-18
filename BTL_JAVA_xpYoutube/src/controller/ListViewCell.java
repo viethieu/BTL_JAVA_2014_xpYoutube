@@ -52,8 +52,7 @@ public class ListViewCell extends ListCell<Item> {
 						}
 					}
 					ctrl.launch(title, link);
-				}
-					
+				}				
 			}
 		});
 	}

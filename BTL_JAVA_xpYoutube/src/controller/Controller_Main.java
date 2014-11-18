@@ -254,7 +254,7 @@ public class Controller_Main implements Initializable {
 	 **********************************************************************************/
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-
+		//sự kiện khi ấn enter
 		idSearchText.setOnKeyPressed(new EventHandler<KeyEvent>() {
 
 			@Override
