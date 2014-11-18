@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.web.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <WebView fx:id="idWebview" layoutY="28.0" prefHeight="368.0" prefWidth="600.0" />
+      <MenuBar fx:id="idFile" layoutY="2.0">
+         <menus>
+            <Menu mnemonicParsing="false" text="File">
+               <items>
+                  <MenuItem fx:id="idMOpen" mnemonicParsing="false" text="Open" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Help">
+               <items>
+                  <MenuItem fx:id="idMAbout" mnemonicParsing="false" onAction="#mAboutTeam" text="About ..." />
+               </items>
+            </Menu>
+         </menus>
+      </MenuBar>
+      <Button fx:id="idSearch" layoutX="540.0" layoutY="2.0" mnemonicParsing="false" text="Search" />
+      <TextField fx:id="idSearchText" layoutX="329.0" layoutY="2.0" prefHeight="25.0" prefWidth="203.0" promptText="film" />
+   </children>
+</Pane>

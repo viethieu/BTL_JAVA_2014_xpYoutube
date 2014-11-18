@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="163.0" prefWidth="289.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Button fx:id="idOFFLINE" layoutX="65.0" layoutY="24.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="159.0" text="XEM OFFLINE" />
+      <Button fx:id="idONLINE" layoutX="65.0" layoutY="90.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="159.0" text="XEM ONLINE" />
+   </children>
+</Pane>
