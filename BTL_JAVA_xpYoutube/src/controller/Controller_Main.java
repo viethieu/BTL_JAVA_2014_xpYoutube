@@ -2,15 +2,19 @@ package controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import application.ParseJsonYoutube;
 import controller.Controller_Search;
+import controller.Item;
 import javafx.application.Platform;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -42,6 +46,12 @@ public class Controller_Main implements Initializable {
 	public MediaPlayer player;
 	private Duration duration;
 	private double volume;
+	String link = null;
+	private List<Item> list;
+	ObservableList<Item> observableList = FXCollections.observableArrayList();
+	private Stage stage = null;
+	private Scene scene;
+	private Pane pane;
 
 	@FXML
 	private TextField idSearchText;
@@ -236,6 +246,17 @@ public class Controller_Main implements Initializable {
 
 				player.setVolume(0.5);
 				idPIn.setProgress(0.5);
+				
+				str = idSearchText.getText();
+				System.out.println(str);
+				ParseJsonYoutube parser = new ParseJsonYoutube(str);
+				list = parser.ParseYoutube();
+				System.out.println(list);
+
+				Controller_Search ctrl = new Controller_Search(list);
+				if (stage != null)
+					stage.close();
+				stage = ctrl.launch();
 			}
 		});
 

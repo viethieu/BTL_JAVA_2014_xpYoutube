@@ -18,7 +18,7 @@ public class Main extends Application {
 		try {
 				Pane root = FXMLLoader.load(getClass().getResource("/giaoDien/layoutMain.fxml"));
 				Scene scene = new Scene(root,600,400);
-				scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+				scene.getStylesheets().add(getClass().getResource("CssMain.css").toExternalForm());
 				primaryStage.setTitle("Xem phim Youtube");
 				Image iconSoftWare = new Image("/giaoDien/iconMovie.png");
 				primaryStage.getIcons().add(iconSoftWare);
