@@ -3,6 +3,6 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
 	<classpathentry kind="con" path="org.eclipse.fx.ide.jdt.core.JAVAFX_CONTAINER"/>
-	<classpathentry kind="lib" path="E:/BTL_Java_PhanMemXemPhim/java-json.jar"/>
+	<classpathentry kind="lib" path="C:/Users/DucHieu/git/BTL_JAVA_2014_xpYoutube/BTL_JAVA_xpYoutube/java-json.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
