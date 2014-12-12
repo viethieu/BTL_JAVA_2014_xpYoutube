@@ -565,6 +565,329 @@ public class Controller_Main implements Initializable {
 			}
 		});
 
+
+		idMRecent.setOnShowing(new EventHandler<Event>() {
+			
+			@Override
+			public void handle(Event arg0) {
+				BufferedReader br = null;
+				ArrayList<String> lines = new ArrayList<String>();
+				try {
+					br = new BufferedReader(new FileReader("log_offline.txt"));
+					String tmp = "";
+					while ((tmp = br.readLine()) != null) {
+						lines.add(tmp);
+					}
+					br.close();
+				} catch (Exception e) {
+					System.out.println("Exception caught : " + e);
+				}
+
+				int size = lines.size();
+
+				if (size == 0) {
+					idMRecent1.setVisible(false);
+					idMRecent2.setVisible(false);
+					idMRecent3.setVisible(false);
+					idMRecent4.setVisible(false);
+					idMRecent5.setVisible(false);
+					idMRecent6.setVisible(false);
+					idMRecent7.setVisible(false);
+				}
+				if (size == 1) {
+					idMRecent1.setText(lines.get(size - 1));
+					idMRecent2.setVisible(false);
+					idMRecent3.setVisible(false);
+					idMRecent4.setVisible(false);
+					idMRecent5.setVisible(false);
+					idMRecent6.setVisible(false);
+					idMRecent7.setVisible(false);
+				} else if (size == 2) {
+					idMRecent1.setText(lines.get(size - 1));
+					idMRecent2.setText(lines.get(size - 2));
+					idMRecent3.setVisible(false);
+					idMRecent4.setVisible(false);
+					idMRecent5.setVisible(false);
+					idMRecent6.setVisible(false);
+					idMRecent7.setVisible(false);
+				} else if (size == 3) {
+					idMRecent1.setText(lines.get(size - 1));
+					idMRecent2.setText(lines.get(size - 2));
+					idMRecent3.setText(lines.get(size - 3));
+					idMRecent4.setVisible(false);
+					idMRecent5.setVisible(false);
+					idMRecent6.setVisible(false);
+					idMRecent7.setVisible(false);
+				} else if (size == 4) {
+					idMRecent1.setText(lines.get(size - 1));
+					idMRecent2.setText(lines.get(size - 2));
+					idMRecent3.setText(lines.get(size - 3));
+					idMRecent4.setText(lines.get(size - 4));
+					idMRecent5.setVisible(false);
+					idMRecent6.setVisible(false);
+					idMRecent7.setVisible(false);
+				} else if (size == 5) {
+					idMRecent1.setText(lines.get(size - 1));
+					idMRecent2.setText(lines.get(size - 2));
+					idMRecent3.setText(lines.get(size - 3));
+					idMRecent4.setText(lines.get(size - 4));
+					idMRecent5.setText(lines.get(size - 5));
+					idMRecent6.setVisible(false);
+					idMRecent7.setVisible(false);
+				} else if (size == 6) {
+					idMRecent1.setText(lines.get(size - 1));
+					idMRecent2.setText(lines.get(size - 2));
+					idMRecent3.setText(lines.get(size - 3));
+					idMRecent4.setText(lines.get(size - 4));
+					idMRecent5.setText(lines.get(size - 5));
+					idMRecent6.setText(lines.get(size - 6));
+					idMRecent7.setVisible(false);
+				} else {
+					idMRecent1.setText(lines.get(size - 1));
+					idMRecent2.setText(lines.get(size - 2));
+					idMRecent3.setText(lines.get(size - 3));
+					idMRecent4.setText(lines.get(size - 4));
+					idMRecent5.setText(lines.get(size - 5));
+					idMRecent6.setText(lines.get(size - 6));
+					idMRecent7.setText(lines.get(size - 7));
+				}
+				
+			}
+		});
+
+		idMRecent1.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent arg0) {
+				if (player != null) {
+					player.stop();
+					idPlay.setText(">");
+				}
+				URL url = null;
+				try {
+					url = new URL("file:///" + idMRecent1.getText());
+					System.out.println(url);
+				} catch (MalformedURLException e) {
+					e.printStackTrace();
+				}
+				Media media = new Media(url.toString());
+				player = new MediaPlayer(media);
+
+				final DoubleProperty width = idMediaView.fitWidthProperty();
+				final DoubleProperty height = idMediaView.fitHeightProperty();
+
+				width.bind(Bindings.selectDouble(idMediaView.sceneProperty(), "width"));
+				height.bind(Bindings.selectDouble(idMediaView.sceneProperty(), "height"));
+
+				idMediaView.setPreserveRatio(true);
+
+				idMediaView.setMediaPlayer(player);
+				player.setVolume(0.5);
+				idPIn.setProgress(0.5);
+
+				// ctrl.launch("Test", "file:///" + file.getAbsolutePath());
+			}
+		});
+		idMRecent2.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent arg0) {
+				if (player != null) {
+					player.stop();
+					idPlay.setText(">");
+				}
+				URL url = null;
+				try {
+					url = new URL("file:///" + idMRecent2.getText());
+					System.out.println(url);
+				} catch (MalformedURLException e) {
+					e.printStackTrace();
+				}
+				Media media = new Media(url.toString());
+				player = new MediaPlayer(media);
+
+				final DoubleProperty width = idMediaView.fitWidthProperty();
+				final DoubleProperty height = idMediaView.fitHeightProperty();
+
+				width.bind(Bindings.selectDouble(idMediaView.sceneProperty(), "width"));
+				height.bind(Bindings.selectDouble(idMediaView.sceneProperty(), "height"));
+
+				idMediaView.setPreserveRatio(true);
+
+				idMediaView.setMediaPlayer(player);
+				player.setVolume(0.5);
+				idPIn.setProgress(0.5);
+
+				// ctrl.launch("Test", "file:///" + file.getAbsolutePath());
+			}
+		});
+		idMRecent3.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent arg0) {
+				if (player != null) {
+					player.stop();
+					idPlay.setText(">");
+				}
+				URL url = null;
+				try {
+					url = new URL("file:///" + idMRecent3.getText());
+					System.out.println(url);
+				} catch (MalformedURLException e) {
+					e.printStackTrace();
+				}
+				Media media = new Media(url.toString());
+				player = new MediaPlayer(media);
+
+				final DoubleProperty width = idMediaView.fitWidthProperty();
+				final DoubleProperty height = idMediaView.fitHeightProperty();
+
+				width.bind(Bindings.selectDouble(idMediaView.sceneProperty(), "width"));
+				height.bind(Bindings.selectDouble(idMediaView.sceneProperty(), "height"));
+
+				idMediaView.setPreserveRatio(true);
+
+				idMediaView.setMediaPlayer(player);
+				player.setVolume(0.5);
+				idPIn.setProgress(0.5);
+
+				// ctrl.launch("Test", "file:///" + file.getAbsolutePath());
+			}
+		});
+		idMRecent4.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent arg0) {
+				if (player != null) {
+					player.stop();
+					idPlay.setText(">");
+				}
+				URL url = null;
+				try {
+					url = new URL("file:///" + idMRecent4.getText());
+					System.out.println(url);
+				} catch (MalformedURLException e) {
+					e.printStackTrace();
+				}
+				Media media = new Media(url.toString());
+				player = new MediaPlayer(media);
+
+				final DoubleProperty width = idMediaView.fitWidthProperty();
+				final DoubleProperty height = idMediaView.fitHeightProperty();
+
+				width.bind(Bindings.selectDouble(idMediaView.sceneProperty(), "width"));
+				height.bind(Bindings.selectDouble(idMediaView.sceneProperty(), "height"));
+
+				idMediaView.setPreserveRatio(true);
+
+				idMediaView.setMediaPlayer(player);
+				player.setVolume(0.5);
+				idPIn.setProgress(0.5);
+
+				// ctrl.launch("Test", "file:///" + file.getAbsolutePath());
+			}
+		});
+		idMRecent5.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent arg0) {
+				if (player != null) {
+					player.stop();
+					idPlay.setText(">");
+				}
+				URL url = null;
+				try {
+					url = new URL("file:///" + idMRecent5.getText());
+					System.out.println(url);
+				} catch (MalformedURLException e) {
+					e.printStackTrace();
+				}
+				Media media = new Media(url.toString());
+				player = new MediaPlayer(media);
+
+				final DoubleProperty width = idMediaView.fitWidthProperty();
+				final DoubleProperty height = idMediaView.fitHeightProperty();
+
+				width.bind(Bindings.selectDouble(idMediaView.sceneProperty(), "width"));
+				height.bind(Bindings.selectDouble(idMediaView.sceneProperty(), "height"));
+
+				idMediaView.setPreserveRatio(true);
+
+				idMediaView.setMediaPlayer(player);
+				player.setVolume(0.5);
+				idPIn.setProgress(0.5);
+
+				// ctrl.launch("Test", "file:///" + file.getAbsolutePath());
+			}
+		});
+		idMRecent6.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent arg0) {
+				if (player != null) {
+					player.stop();
+					idPlay.setText(">");
+				}
+				URL url = null;
+				try {
+					url = new URL("file:///" + idMRecent6.getText());
+					System.out.println(url);
+				} catch (MalformedURLException e) {
+					e.printStackTrace();
+				}
+				Media media = new Media(url.toString());
+				player = new MediaPlayer(media);
+
+				final DoubleProperty width = idMediaView.fitWidthProperty();
+				final DoubleProperty height = idMediaView.fitHeightProperty();
+
+				width.bind(Bindings.selectDouble(idMediaView.sceneProperty(), "width"));
+				height.bind(Bindings.selectDouble(idMediaView.sceneProperty(), "height"));
+
+				idMediaView.setPreserveRatio(true);
+
+				idMediaView.setMediaPlayer(player);
+				player.setVolume(0.5);
+				idPIn.setProgress(0.5);
+
+				// ctrl.launch("Test", "file:///" + file.getAbsolutePath());
+			}
+		});
+		idMRecent7.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent arg0) {
+				if (player != null) {
+					player.stop();
+					idPlay.setText(">");
+				}
+				URL url = null;
+				try {
+					url = new URL("file:///" + idMRecent7.getText());
+					System.out.println(url);
+				} catch (MalformedURLException e) {
+					e.printStackTrace();
+				}
+				Media media = new Media(url.toString());
+				player = new MediaPlayer(media);
+
+				final DoubleProperty width = idMediaView.fitWidthProperty();
+				final DoubleProperty height = idMediaView.fitHeightProperty();
+
+				width.bind(Bindings.selectDouble(idMediaView.sceneProperty(), "width"));
+				height.bind(Bindings.selectDouble(idMediaView.sceneProperty(), "height"));
+
+				idMediaView.setPreserveRatio(true);
+
+				idMediaView.setMediaPlayer(player);
+				player.setVolume(0.5);
+				idPIn.setProgress(0.5);
+
+				// ctrl.launch("Test", "file:///" + file.getAbsolutePath());
+			}
+		});
+		
+
 	}
 
 	/*****************************************************************************
