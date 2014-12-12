@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.scene.web.*?>
 <?import javafx.scene.*?>
 <?import javafx.geometry.*?>
@@ -8,85 +9,122 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+
+<StackPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <HBox prefHeight="26.0" prefWidth="600.0">
+      <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="423.0" prefWidth="600.0">
          <children>
-            <MenuBar>
-              <menus>
-                <Menu mnemonicParsing="false" text="File">
-                  <items>
-                    <MenuItem fx:id="idMClose" mnemonicParsing="false" onAction="#mCloseScene" text="Close" />
-                  </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Play">
-                  <items>
-                    <MenuItem fx:id="idMStop" mnemonicParsing="false" onAction="#mStop" text="Stop" />
-                        <MenuItem fx:id="idMPlay" mnemonicParsing="false" onAction="#mPlay" text="Play" />
-                        <MenuItem fx:id="idMPause" mnemonicParsing="false" onAction="#mPause" text="Pause" />
-                        <Menu mnemonicParsing="false" text="Volume">
-                          <items>
-                            <MenuItem fx:id="idMVolumeDown" mnemonicParsing="false" onAction="#mVolumeDown" text="Down" />
-                              <MenuItem fx:id="idMVolumeUp" mnemonicParsing="false" onAction="#mVolumeUp" text="Up" />
-                              <MenuItem fx:id="idMVolumeMute" mnemonicParsing="false" onAction="#mVolumeMute" text="Mute" />
-                          </items>
+            <Pane layoutY="-1.0" prefHeight="43.0" prefWidth="600.0" style="-fx-background-color: #d3d3d3;" StackPane.alignment="CENTER">
+               <children>
+                  <TextField fx:id="idSearchText" layoutX="338.0" layoutY="8.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="254.0" promptText="film" style="-fx-padding: 0 30 0 30;" />
+                  <MenuBar layoutX="6.0" layoutY="10.0" style="-fx-background-color: #d3d3d3;">
+                    <menus>
+                      <Menu mnemonicParsing="false" text="File">
+                        <items>
+                              <MenuItem fx:id="idMOpen" mnemonicParsing="false" text="Open" />
+                              <Menu fx:id="idMRecent" mnemonicParsing="false" text="Recents...">
+                                 <items>
+                                    <MenuItem fx:id="idMRecent1" mnemonicParsing="false" />
+                                    <MenuItem fx:id="idMRecent2" mnemonicParsing="false" />
+                                    <MenuItem fx:id="idMRecent3" mnemonicParsing="false" />
+                                    <MenuItem fx:id="idMRecent4" mnemonicParsing="false" />
+                                    <MenuItem fx:id="idMRecent5" mnemonicParsing="false" />
+                                    <MenuItem fx:id="idMRecent6" mnemonicParsing="false" />
+                                    <MenuItem fx:id="idMRecent7" mnemonicParsing="false" />
+                                    <MenuItem fx:id="idMClearRecent" mnemonicParsing="false" text="Clear Recent list" />
+                                 </items>
+                              </Menu>
+                          <MenuItem fx:id="idMClose" mnemonicParsing="false" onAction="#mCloseScene" text="Close" />
+                        </items>
+                      </Menu>
+                      <Menu mnemonicParsing="false" text="Play">
+                        <items>
+                          <MenuItem fx:id="idMStop" mnemonicParsing="false" onAction="#mStop" text="Stop" />
+                              <MenuItem fx:id="idMPlay" mnemonicParsing="false" onAction="#mPlay" text="Play" />
+                              <MenuItem fx:id="idMPause" mnemonicParsing="false" onAction="#mPause" text="Pause" />
+                              <Menu mnemonicParsing="false" text="Volume">
+                                <items>
+                                  <MenuItem fx:id="idMVolumeDown" mnemonicParsing="false" onAction="#mVolumeDown" text="Down" />
+                                    <MenuItem fx:id="idMVolumeUp" mnemonicParsing="false" onAction="#mVolumeUp" text="Up" />
+                                    <MenuItem fx:id="idMVolumeMute" mnemonicParsing="false" onAction="#mVolumeMute" text="Mute" />
+                                </items>
+                              </Menu>
+                        </items>
+                      </Menu>
+                        <Menu mnemonicParsing="false" text="Option">
+                           <items>
+                              <Menu mnemonicParsing="false" text="Balance">
+                                <items>
+                                    <MenuItem fx:id="idMBalance1" mnemonicParsing="false" onAction="#mBalance1" text="1.0" />
+                                    <MenuItem fx:id="idMBalance2" mnemonicParsing="false" onAction="#mBalance2" text="0.5" />
+                                    <MenuItem fx:id="idMBalance3" mnemonicParsing="false" onAction="#mBalance3" text="0" />
+                                    <MenuItem fx:id="idMBalance4" mnemonicParsing="false" onAction="#mBalance4" text="-0.5" />
+                                  <MenuItem fx:id="idMBalance5" mnemonicParsing="false" onAction="#mBalance5" text="-1.0" />
+                                </items>
+                              </Menu>
+                           </items>
                         </Menu>
-                  </items>
-                </Menu>
-                  <Menu mnemonicParsing="false" text="Option">
-                     <items>
-                        <Menu mnemonicParsing="false" text="Balance">
-                          <items>
-                              <MenuItem fx:id="idMBalance1" mnemonicParsing="false" onAction="#mBalance1" text="1.0" />
-                              <MenuItem fx:id="idMBalance2" mnemonicParsing="false" onAction="#mBalance2" text="0.5" />
-                              <MenuItem fx:id="idMBalance3" mnemonicParsing="false" onAction="#mBalance3" text="0" />
-                              <MenuItem fx:id="idMBalance4" mnemonicParsing="false" onAction="#mBalance4" text="-0.5" />
-                            <MenuItem fx:id="idMBalance5" mnemonicParsing="false" onAction="#mBalance5" text="-1.0" />
-                          </items>
-                        </Menu>
-                     </items>
-                  </Menu>
-                <Menu mnemonicParsing="false" text="Help">
-                  <items>
-                    <MenuItem fx:id="idMAbout" mnemonicParsing="false" onAction="#mAboutTeam" text="About ..." />
-                  </items>
-                </Menu>
-              </menus>
-            </MenuBar>
-            <Region prefHeight="26.0" prefWidth="135.0" />
-            <TextField fx:id="idSearchText" prefHeight="25.0" prefWidth="203.0" promptText="film" />
-            <Region prefHeight="26.0" prefWidth="18.0" />
-            <Button fx:id="idSearch" mnemonicParsing="false" prefHeight="41.0" prefWidth="54.0" text="Search" />
-         </children>
-      </HBox>
-      <Pane fx:id="idPaneMedia" layoutY="26.0" style="-fx-background-color: #bfc2c7; -fx-position-shape: true;">
-         <children>
-            <WebView fx:id="idWebView" layoutY="-1.0" prefHeight="308.0" prefWidth="600.0" />
-            <MediaView fx:id="idMediaView" fitHeight="300.0" fitWidth="600.0" />
+                      <Menu mnemonicParsing="false" text="Help">
+                        <items>
+                          <MenuItem fx:id="idMAbout" mnemonicParsing="false" onAction="#mAboutTeam" text="About ..." />
+                        </items>
+                      </Menu>
+                    </menus>
+                  </MenuBar>
+                  <ImageView fitHeight="43.0" fitWidth="30.0" layoutX="338.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/yt.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="idSearch" fitHeight="31.0" fitWidth="28.0" layoutX="565.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/search.png" />
+                     </image>
+                  </ImageView>
+                  <Region layoutX="194.0" layoutY="8.0" prefHeight="28.0" prefWidth="135.0" />
+               </children>
+            </Pane>
+            <StackPane layoutY="42.0">
+               <children>
+                  <Pane fx:id="idPaneMedia" layoutY="42.0" prefHeight="310.0" prefWidth="600.0" style="-fx-position-shape: true;">
+                     <children>
+                        <MediaView fx:id="idMediaView" fitHeight="300.0" fitWidth="600.0" layoutY="5.0" />
+                     </children>
+                  </Pane>
+               </children>
+            </StackPane>
+            <StackPane layoutY="353.0">
+               <children>
+                  <HBox layoutY="353.0" prefHeight="35.0" prefWidth="600.0" style="-fx-background-color: #d3d3d3;">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="36.0" prefWidth="42.0" text=" Time:" />
+                        <Region prefHeight="35.0" prefWidth="32.0" />
+                        <Slider fx:id="idSliderTime" prefHeight="14.0" prefWidth="390.0" style="-fx-padding: 8 0 8 0;" />
+                        <Region prefHeight="35.0" prefWidth="22.0" />
+                        <Label fx:id="idTime" contentDisplay="CENTER" prefHeight="35.0" prefWidth="87.0" text="--:---/--:--" />
+                     </children>
+                  </HBox>
+               </children>
+            </StackPane>
+            <StackPane layoutY="388.0">
+               <children>
+                  <HBox layoutY="388.0" prefHeight="35.0" prefWidth="600.0" style="-fx-background-color: #d3d3d3;">
+                     <children>
+                        <Button fx:id="idPlay" mnemonicParsing="false" prefHeight="23.0" prefWidth="44.0" style="-fx-background-color: yellow; -fx-padding: 7 0 7 0;" text="Play" />
+                        <Button fx:id="idStop" mnemonicParsing="false" prefHeight="26.0" prefWidth="48.0" style="-fx-padding: 7 0 7 0;" text="Stop" />
+                        <Button fx:id="idFullScreen" mnemonicParsing="false" prefHeight="22.0" prefWidth="83.0" style="-fx-padding: 7 0 7 0;" text="Full Screen" />
+                        <Button fx:id="idList" mnemonicParsing="false" prefHeight="24.0" prefWidth="48.0" style="-fx-padding: 7 0 7 0;" text="List" />
+                        <Region prefHeight="35.0" prefWidth="242.0" />
+                        <Button fx:id="idVolumeDown" mnemonicParsing="false" prefHeight="23.0" prefWidth="27.0" style="-fx-padding: 7 0  7 0;" text="-" />
+                        <ProgressIndicator fx:id="idPIn" progress="0.0" />
+                        <Button fx:id="idVolumeUp" mnemonicParsing="false" prefHeight="25.0" prefWidth="28.0" style="-fx-padding: 7 0 7 0;" text="+" />
+                        <Region prefHeight="35.0" prefWidth="14.0" />
+                        <Button fx:id="idMute" alignment="CENTER" mnemonicParsing="false" style="-fx-padding: 7 9 7 9;" text="x" />
+                     </children>
+                  </HBox>
+               </children>
+            </StackPane>
          </children>
       </Pane>
-      <HBox layoutY="332.0" prefHeight="35.0" prefWidth="600.0" style="-fx-background-color: #7fffd4;">
-         <children>
-            <Label alignment="CENTER" prefHeight="36.0" prefWidth="42.0" text=" Time:" />
-            <Region prefHeight="26.0" prefWidth="15.0" />
-            <Slider fx:id="idSliderTime" prefHeight="14.0" prefWidth="390.0" style="-fx-padding: 8 0 8 0;" />
-            <Region prefHeight="26.0" prefWidth="14.0" />
-            <Label fx:id="idTime" contentDisplay="CENTER" prefHeight="35.0" prefWidth="118.0" text="--:---/--:--" />
-         </children>
-      </HBox>
-      <HBox layoutY="367.0" prefHeight="35.0" prefWidth="600.0">
-         <children>
-            <Button fx:id="idPlay" mnemonicParsing="false" prefHeight="23.0" prefWidth="44.0" style="-fx-background-color: yellow; -fx-padding: 7 0 7 0;" text="Play" />
-            <Button fx:id="idStop" mnemonicParsing="false" prefHeight="26.0" prefWidth="48.0" style="-fx-padding: 7 0 7 0;" text="Stop" />
-            <Button fx:id="idFullScreen" mnemonicParsing="false" prefHeight="22.0" prefWidth="83.0" style="-fx-padding: 7 0 7 0;" text="Full Screen" />
-            <Button fx:id="idList" mnemonicParsing="false" prefHeight="24.0" prefWidth="48.0" style="-fx-padding: 7 0 7 0;" text="List" />
-            <Region prefHeight="35.0" prefWidth="242.0" />
-            <Button fx:id="idVolumeDown" mnemonicParsing="false" prefHeight="23.0" prefWidth="27.0" style="-fx-padding: 7 0  7 0;" text="-" />
-            <ProgressIndicator fx:id="idPIn" progress="0.0" />
-            <Button fx:id="idVolumeUp" mnemonicParsing="false" prefHeight="25.0" prefWidth="28.0" style="-fx-padding: 7 0 7 0;" text="+" />
-            <Region prefHeight="35.0" prefWidth="14.0" />
-            <Button fx:id="idMute" alignment="CENTER" mnemonicParsing="false" style="-fx-padding: 7 9 7 9;" text="x" />
-         </children>
-      </HBox>
    </children>
-</Pane>
+</StackPane>

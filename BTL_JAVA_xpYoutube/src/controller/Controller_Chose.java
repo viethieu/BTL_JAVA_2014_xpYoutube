@@ -32,19 +32,20 @@ public class Controller_Chose implements Initializable {
 
 	public Controller_Chose() {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(
-				"/layout/CHOSE.fxml"));
+				"/giaodien/CHOSE.fxml"));
 		fxmlLoader.setController(this);
 		try {
 			pane = fxmlLoader.load();
 			scene = new Scene(pane);
+			scene.getStylesheets().add(getClass().getResource("/css/Choose.css").toExternalForm());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 	public void launch() {
 		Stage primaryStage = new Stage();
-		primaryStage.setTitle("CHƯƠNG TRÌNH XEM PHIM");
-		Image iconSoftWare = new Image("/layout/iconMovie.png");
+		primaryStage.setTitle("CHƯƠNNG TRÌNH XEM PHIM");
+		Image iconSoftWare = new Image("/giaodien/iconMovie.png");
 		primaryStage.getIcons().add(iconSoftWare);	
 		primaryStage.setScene(scene);
 		primaryStage.show();

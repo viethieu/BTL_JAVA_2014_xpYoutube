@@ -21,8 +21,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.web.WebView;
@@ -34,13 +36,14 @@ public class Controller_On implements Initializable {
 
 	private Pane pane;
 	private Scene scene;
-	String str;
-	String link = null;
+	private Stage stage;
+	private String str;
+	private String link = null;
 	private List<Item> list;
 	ObservableList<Item> observableList = FXCollections.observableArrayList();
 
 	@FXML
-	private Button idSearch;
+	private ImageView idSearch;
 
 	@FXML
 	private TextField idTextSearch;
@@ -53,11 +56,12 @@ public class Controller_On implements Initializable {
 
 	public Controller_On() {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(
-				"/layout/Online.fxml"));
+				"/giaodien/ONLINE.fxml"));
 		fxmlLoader.setController(this);
 		try {
 			pane = fxmlLoader.load();
 			scene = new Scene(pane);
+			scene.getStylesheets().add(getClass().getResource("/css/Onl.css").toExternalForm());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -75,7 +79,7 @@ public class Controller_On implements Initializable {
 
 		Stage primaryStage = new Stage();
 		primaryStage.setTitle(str1);
-		Image iconSoftWare = new Image("/layout/iconMovie.png");
+		Image iconSoftWare = new Image("/giaodien/iconMovie.png");
 		primaryStage.getIcons().add(iconSoftWare);
 		primaryStage.setScene(scene);
 		primaryStage.show();
@@ -95,14 +99,16 @@ public class Controller_On implements Initializable {
 					System.out.println(list);
 
 					Controller_Search ctrl = new Controller_Search(list);
-					ctrl.launch();
+					if (stage != null)
+						stage.close();
+					stage = ctrl.launch();
 				}
 			}
 		});
-		idSearch.setOnAction(new EventHandler<ActionEvent>() {
+		idSearch.setOnMouseClicked(new EventHandler <MouseEvent>() {
 
 			@Override
-			public void handle(ActionEvent arg0) {
+			public void handle(MouseEvent arg0) {
 				str = idTextSearch.getText();
 				System.out.println(str);
 				ParseJsonYoutube parser = new ParseJsonYoutube(str);
@@ -110,7 +116,9 @@ public class Controller_On implements Initializable {
 				System.out.println(list);
 
 				Controller_Search ctrl = new Controller_Search(list);
-				ctrl.launch();
+				if (stage != null)
+					stage.close();
+				stage = ctrl.launch();
 			}
 		});
 		idMAbout.setOnAction(new EventHandler<ActionEvent>() {
@@ -120,7 +128,7 @@ public class Controller_On implements Initializable {
 				AnchorPane root;
 				try {
 					root = FXMLLoader.load(getClass().getResource(
-							"/layout/Team.fxml"));
+							"/giaodien/Team.fxml"));
 					Scene scene = new Scene(root);
 					Stage primaryStage = new Stage();
 					primaryStage.setTitle("About YourTube");

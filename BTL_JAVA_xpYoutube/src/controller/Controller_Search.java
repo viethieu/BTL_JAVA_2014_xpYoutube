@@ -13,6 +13,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.Callback;
@@ -28,7 +29,7 @@ public class Controller_Search  {
 	@FXML
 	private TextField idTextSearch;
 	@FXML
-	private Button idButSearch;
+	private ImageView idSearch;
 	@FXML
 	private ListView<Item> idListView;
 
@@ -38,7 +39,7 @@ public class Controller_Search  {
 		try {
 			pane = fxmlLoader.load();
 			scene = new Scene(pane);
-			scene.getStylesheets().add(getClass().getResource("/application.CssSearch.css").toExternalForm());
+			scene.getStylesheets().add(getClass().getResource("/css/Search.css").toExternalForm());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -65,7 +66,7 @@ public class Controller_Search  {
 	}
 
 	@FXML
-	private void actionButton() {
+	private void actionSearch() {
 		str = idTextSearch.getText();
 
 		System.out.println(str);
@@ -85,7 +86,7 @@ public class Controller_Search  {
 	 
 	@FXML
 	private void pressEnter ()  {
-		actionButton();
+		actionSearch();
 	}
 
 }

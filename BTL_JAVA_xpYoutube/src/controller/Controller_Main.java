@@ -1,6 +1,9 @@
 package controller;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -11,6 +14,8 @@ import controller.Item;
 import javafx.application.Platform;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.DoubleProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -24,11 +29,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
@@ -39,6 +46,7 @@ import javafx.scene.media.MediaPlayer.Status;
 import javafx.scene.media.MediaView;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -67,17 +75,34 @@ public class Controller_Main implements Initializable {
 		try {
 			pane = fxmlLoader.load();
 			scene = new Scene(pane);
-			scene.getStylesheets().add(getClass().getResource("/application/CssMain.css").toExternalForm());
+			scene.getStylesheets().add(getClass().getResource("/css/Off.css").toExternalForm());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 	
 	public void launch(String str1, String str2) {
-		link = str2;
-		if (link != null) {
-			final WebEngine eng = idWebView.getEngine();
-			eng.load(link);
+		if (str2 != null) {
+			URL url = null;
+			try {
+				url = new URL(str2);
+			} catch (MalformedURLException e) {
+				e.printStackTrace();
+			}
+			Media media = new Media(url.toString());
+			player = new MediaPlayer(media);
+
+			final DoubleProperty width = idMediaView.fitWidthProperty();
+			final DoubleProperty height = idMediaView.fitHeightProperty();
+
+			width.bind(Bindings.selectDouble(idMediaView.sceneProperty(), "width"));
+			height.bind(Bindings.selectDouble(idMediaView.sceneProperty(), "height"));
+
+			idMediaView.setPreserveRatio(true);
+
+			idMediaView.setMediaPlayer(player);
+			player.setVolume(0.5);
+			idPIn.setProgress(0.5);
 		}
 		Stage primaryStage = new Stage();
 		primaryStage.setTitle(str1);
@@ -96,7 +121,7 @@ public class Controller_Main implements Initializable {
 	@FXML
 	private TextField idSearchText;
 	@FXML
-	private Button idSearch;
+	private ImageView idSearch;
 	@FXML
 	private Button idPlay;
 	@FXML
@@ -119,8 +144,6 @@ public class Controller_Main implements Initializable {
 	private Label idTime;
 	@FXML
 	private Pane idPaneMedia;
-	@FXML
-	private WebView idWebView;
 	
 	/************************************************************************************
 	 * 
@@ -128,19 +151,43 @@ public class Controller_Main implements Initializable {
 	 * 
 	 *************************************************************************************/
 	@FXML
+	private MenuItem idMOpen;
+	@FXML
 	private MenuItem idMClose;
+	@FXML
+	private Menu idMRecent;
+
+	@FXML
+	private MenuItem idMRecent1;
+	@FXML
+	private MenuItem idMRecent2;
+	@FXML
+	private MenuItem idMRecent3;
+	@FXML
+	private MenuItem idMRecent4;
+	@FXML
+	private MenuItem idMRecent5;
+	@FXML
+	private MenuItem idMRecent6;
+	@FXML
+	private MenuItem idMRecent7;
+	@FXML
+	private MenuItem idMClearRecent;
+
 	@FXML
 	private MenuItem idMStop;
 	@FXML
 	private MenuItem idMPlay;
 	@FXML
 	private MenuItem idMPause;
+	
 	@FXML
 	private MenuItem idMVolumeDown;
 	@FXML
 	private MenuItem idMVolumeUp;
 	@FXML
 	private MenuItem idMVolumeMute;
+	
 	@FXML
 	private MenuItem idMBalance1;
 	@FXML
@@ -151,6 +198,12 @@ public class Controller_Main implements Initializable {
 	private MenuItem idMBalance4;
 	@FXML
 	private MenuItem idMBalance5;
+	
+	/**********************************************************************
+	 * 
+	 * khai bao cac ham duoc tao trong sence builder
+	 * 
+	 **********************************************************************/
 	@FXML
 	private MenuItem idMAbout;
 
@@ -249,7 +302,7 @@ public class Controller_Main implements Initializable {
 
 	/**********************************************************************************
 	 * 
-	 * 4. CÁC CONTROL KHÁC ĐƯỢC XỬ LÝ TRONG HÀM KHỞI TẠO initialize()
+	 * 5. CÁC CONTROL KHÁC ĐƯỢC XỬ LÝ TRONG HÀM KHỞI TẠO initialize()
 	 * 
 	 **********************************************************************************/
 	@Override
@@ -279,13 +332,13 @@ public class Controller_Main implements Initializable {
 		 *5. Lập trình sự kiện cho nút search Xử lý lấy địa chỉ link video ở đây
 		 * 
 		 *****************************************************************************/
-		idSearch.setOnAction(new EventHandler<ActionEvent>() {
+		idSearch.setOnMouseClicked(new EventHandler<Event>() {
 
 			@Override
-			public void handle(ActionEvent arg0) {
+			public void handle(Event arg0) {
 				/* Cach lay video tren mang*/
-				final String MEDIA_URL = "http://download.oracle.com/otndocs/products/javafx/oow2010-2.flv";
-				pick = new Media(MEDIA_URL);
+//				final String MEDIA_URL = "http://download.oracle.com/otndocs/products/javafx/oow2010-2.flv";
+//				pick = new Media(MEDIA_URL);
 
 				/* Cach lay video trong may tinh*/			
 				//str = idSearchText.getText();
@@ -293,11 +346,11 @@ public class Controller_Main implements Initializable {
 				//URL resource = getClass().getResource(str);
 				//pick = new Media(resource.toString());
 
-				player = new MediaPlayer(pick);
-				idMediaView.setMediaPlayer(player);
-
-				player.setVolume(0.5);
-				idPIn.setProgress(0.5);
+//				player = new MediaPlayer(pick);
+//				idMediaView.setMediaPlayer(player);
+//
+//				player.setVolume(0.5);
+//				idPIn.setProgress(0.5);
 				
 				str = idSearchText.getText();
 				System.out.println(str);
@@ -440,6 +493,78 @@ public class Controller_Main implements Initializable {
 					player.setMute(true);
 			}
 		});
+		
+		idMOpen.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent event) {
+		
+				final FileChooser fileChooser = new FileChooser();
+				Stage stage = new Stage();
+				File file = fileChooser.showOpenDialog(stage);
+				if (file != null) {
+					// System.out.println(file.getAbsolutePath());
+					// openFile(file);
+					// Controller_Main ctrl = new Controller_Main();
+					// try {
+					// Writer
+					// //PrintWriter log_off = new PrintWriter(new
+					// FileWriter("log_offline.txt"));
+					// PrintWriter log_off= new PrintWriter(filename,true);
+					// log_off.println("file:///" + file.getAbsolutePath());
+					// log_off.flush();
+					//
+					// } catch (IOException e) {
+					// // TODO Auto-generated catch block
+					// e.printStackTrace();
+					// }
+
+					// player.stop();
+					try {
+						File filename = new File("log_offline.txt");
+						FileWriter fw = new FileWriter(filename, true);
+						fw.write(file.getAbsolutePath() + "\n");// appends the
+																// string to the
+																// file
+						fw.close();
+					} catch (IOException ioe) {
+						System.err.println("IOException: " + ioe.getMessage());
+					}
+
+					URL url = null;
+					try {
+						url = new URL("file:///" + file.getAbsolutePath());
+						System.out.println(url);
+					} catch (MalformedURLException e) {
+						e.printStackTrace();
+					}
+					
+					if (player != null) {
+						player.stop();
+						idPlay.setText(">");
+					}
+					
+					Media media = new Media(url.toString());
+					player = new MediaPlayer(media);
+
+					final DoubleProperty width = idMediaView.fitWidthProperty();
+					final DoubleProperty height = idMediaView.fitHeightProperty();
+
+					width.bind(Bindings.selectDouble(idMediaView.sceneProperty(), "width"));
+					height.bind(Bindings.selectDouble(idMediaView.sceneProperty(), "height"));
+
+					idMediaView.setPreserveRatio(true);
+
+					idMediaView.setMediaPlayer(player);
+					player.setVolume(0.5);
+					idPIn.setProgress(0.5);
+
+					// ctrl.launch("Test", "file:///" + file.getAbsolutePath());
+				}
+
+			}
+		});
+
 	}
 
 	/*****************************************************************************

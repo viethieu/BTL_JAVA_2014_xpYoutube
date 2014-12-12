@@ -1,5 +1,8 @@
 package controller;
 
+import java.io.FileWriter;
+import java.io.IOException;
+
 import javafx.event.EventHandler;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
@@ -37,9 +40,18 @@ public class ListViewCell extends ListCell<Item> {
 			@Override
 			public void handle(MouseEvent click) {
 				if (click.getClickCount() == 2){
-					Controller_Main ctrl = new Controller_Main();
+					Controller_On ctrl = new Controller_On();
 					String id = "";
 					int i, j;
+					try {
+						String filename = "log_online.txt";
+						FileWriter fw = new FileWriter(filename, true);
+						fw.write(title + "\n");
+						fw.write(link + "\n");
+						fw.close();
+					} catch (IOException ioe) {
+						System.err.println("IOException: " + ioe.getMessage());
+					}
 					for (i = 0; i < link.length(); i++) {
 						if (link.charAt(i) == 'v') {
 							for (j = i + 2; j < link.length(); j++) {
@@ -69,7 +81,7 @@ public class ListViewCell extends ListCell<Item> {
 			label1.setStyle("-fx-font-weight: bold;" + "-fx-font-size: 14px;" + "-fx-padding: 0 0 10 0;");
 			label2.setText("  " + it.getDate());
 			label3.setText(it.getDuration());
-			label4.setText("  " + "Lượt xem: " + it.getViewCount());
+			label4.setText("  " + "Luot xem: " + it.getViewCount());
 			image = new Image(it.geticon());
 			imageView = new ImageView(image);
 			hyperlink.setText(it.getLink());

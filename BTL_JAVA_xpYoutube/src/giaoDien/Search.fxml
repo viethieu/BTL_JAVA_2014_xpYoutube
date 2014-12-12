@@ -1,23 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="636.0" prefWidth="416.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="636.0" prefWidth="416.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <HBox layoutX="121.0" layoutY="14.0" prefHeight="40.0" prefWidth="281.0">
-         <children>
-            <TextField fx:id="idTextSearch" onAction="#pressEnter" prefHeight="30.0" prefWidth="205.0" promptText="search video" style="-fx-position-shape: center;">
-               <font>
-                  <Font size="14.0" />
-               </font></TextField>
-            <Region prefHeight="40.0" prefWidth="10.0" />
-            <Button fx:id="idButSearch" mnemonicParsing="false" onAction="#actionButton" prefHeight="31.0" prefWidth="57.0" text="Search" />
-         </children>
-      </HBox>
+      <TextField fx:id="idTextSearch" layoutX="114.0" layoutY="14.0" onAction="#pressEnter" prefHeight="30.0" prefWidth="294.0" promptText="search video" style="-fx-position-shape: center; -fx-padding: 0 30 0 30;">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextField>
+      <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="114.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/yt.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="idSearch" fitHeight="30.0" fitWidth="30.0" layoutX="378.0" layoutY="14.0" onMouseClicked="#actionSearch" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/search.png" />
+         </image>
+      </ImageView>
       <ListView fx:id="idListView" layoutY="55.0" prefHeight="581.0" prefWidth="416.0" />
    </children>
 </Pane>
