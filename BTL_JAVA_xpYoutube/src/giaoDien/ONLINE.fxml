@@ -14,6 +14,18 @@
           <Menu mnemonicParsing="false" text="File">
             <items>
               <MenuItem fx:id="idMOpen" mnemonicParsing="false" text="Open file" />
+                  <Menu fx:id="idMRecent" mnemonicParsing="false" text="Recents...">
+                     <items>
+                        <MenuItem fx:id="idMRecent1" mnemonicParsing="false" />
+                        <MenuItem fx:id="idMRecent2" mnemonicParsing="false" />
+                        <MenuItem fx:id="idMRecent3" mnemonicParsing="false" />
+                        <MenuItem fx:id="idMRecent4" mnemonicParsing="false" />
+                        <MenuItem fx:id="idMRecent5" mnemonicParsing="false" />
+                        <MenuItem fx:id="idMRecent6" mnemonicParsing="false" />
+                        <MenuItem fx:id="idMRecent7" mnemonicParsing="false" />
+                        <MenuItem fx:id="idMClearRecent" mnemonicParsing="false" text="Clear Recent list" />
+                     </items>
+                  </Menu>
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">

@@ -1,9 +1,12 @@
 package controller;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -12,12 +15,14 @@ import javafx.beans.property.DoubleProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -41,6 +46,9 @@ public class Controller_On implements Initializable {
 	private String link = null;
 	private List<Item> list;
 	ObservableList<Item> observableList = FXCollections.observableArrayList();
+	private ArrayList<String> lines = new ArrayList<String>();
+	private int size;
+	private Stage primaryStage;
 
 	@FXML
 	private ImageView idSearch;
@@ -50,6 +58,25 @@ public class Controller_On implements Initializable {
 
 	@FXML
 	private MenuItem idMOpen, idMAbout;
+	@FXML
+	private Menu idMRecent;
+	@FXML
+	private MenuItem idMRecent1;
+	@FXML
+	private MenuItem idMRecent2;
+	@FXML
+	private MenuItem idMRecent3;
+	@FXML
+	private MenuItem idMRecent4;
+	@FXML
+	private MenuItem idMRecent5;
+	@FXML
+	private MenuItem idMRecent6;
+	@FXML
+	private MenuItem idMRecent7;
+	@FXML
+	private MenuItem idMClearRecent;
+
 
 	@FXML
 	private WebView idWebView;
@@ -77,7 +104,7 @@ public class Controller_On implements Initializable {
 							+ "\" frameborder=\"0\" allowfullscreen></iframe>");
 		}
 
-		Stage primaryStage = new Stage();
+		primaryStage = new Stage();
 		primaryStage.setTitle(str1);
 		Image iconSoftWare = new Image("/giaodien/iconMovie.png");
 		primaryStage.getIcons().add(iconSoftWare);
@@ -181,6 +208,198 @@ public class Controller_On implements Initializable {
 				}
 			}
 		});
+		
+		idMRecent.setOnShowing(new EventHandler<Event>() {
+
+			@Override
+			public void handle(Event arg0) {
+				BufferedReader br = null;
+				try {
+					br = new BufferedReader(new FileReader("log_online.txt"));
+					String tmp = "";
+					while ((tmp = br.readLine()) != null) {
+						lines.add(tmp);
+					}
+					br.close();
+				} catch (Exception e) {
+					System.out.println("Exception caught : " + e);
+				}
+
+				size = lines.size();
+				System.out.println (size);
+
+				if (size == 0) {
+					idMRecent1.setVisible(false);
+					idMRecent2.setVisible(false);
+					idMRecent3.setVisible(false);
+					idMRecent4.setVisible(false);
+					idMRecent5.setVisible(false);
+					idMRecent6.setVisible(false);
+					idMRecent7.setVisible(false);
+				}
+				if (size == 2) {
+					idMRecent1.setText(lines.get(size - 2));
+					idMRecent2.setVisible(false);
+					idMRecent3.setVisible(false);
+					idMRecent4.setVisible(false);
+					idMRecent5.setVisible(false);
+					idMRecent6.setVisible(false);
+					idMRecent7.setVisible(false);
+				} else if (size == 4) {
+					idMRecent1.setText(lines.get(size - 2));
+					idMRecent2.setText(lines.get(size - 4));
+					idMRecent3.setVisible(false);
+					idMRecent4.setVisible(false);
+					idMRecent5.setVisible(false);
+					idMRecent6.setVisible(false);
+					idMRecent7.setVisible(false);
+				} else if (size == 6) {
+					idMRecent1.setText(lines.get(size - 2));
+					idMRecent2.setText(lines.get(size - 4));
+					idMRecent3.setText(lines.get(size - 6));
+					idMRecent4.setVisible(false);
+					idMRecent5.setVisible(false);
+					idMRecent6.setVisible(false);
+					idMRecent7.setVisible(false);
+				} else if (size == 8) {
+					idMRecent1.setText(lines.get(size - 2));
+					idMRecent2.setText(lines.get(size - 4));
+					idMRecent3.setText(lines.get(size - 6));
+					idMRecent4.setText(lines.get(size - 8));
+					idMRecent5.setVisible(false);
+					idMRecent6.setVisible(false);
+					idMRecent7.setVisible(false);
+				} else if (size == 10) {
+					idMRecent1.setText(lines.get(size - 2));
+					idMRecent2.setText(lines.get(size - 4));
+					idMRecent3.setText(lines.get(size - 6));
+					idMRecent4.setText(lines.get(size - 8));
+					idMRecent5.setText(lines.get(size - 10));
+					idMRecent6.setVisible(false);
+					idMRecent7.setVisible(false);
+				} else if (size == 12) {
+					idMRecent1.setText(lines.get(size - 2));
+					idMRecent2.setText(lines.get(size - 4));
+					idMRecent3.setText(lines.get(size - 6));
+					idMRecent4.setText(lines.get(size - 8));
+					idMRecent5.setText(lines.get(size - 10));
+					idMRecent6.setText(lines.get(size - 12));
+					idMRecent7.setVisible(false);
+				} else {
+					idMRecent1.setText(lines.get(size - 2));
+					idMRecent2.setText(lines.get(size - 4));
+					idMRecent3.setText(lines.get(size - 6));
+					idMRecent4.setText(lines.get(size - 8));
+					idMRecent5.setText(lines.get(size - 10));
+					idMRecent6.setText(lines.get(size - 12));
+					idMRecent7.setText(lines.get(size - 14));
+				}
+
+			}
+		});
+
+		idMRecent1.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent arg0) {
+				primaryStage.setTitle(idMRecent1.getText());
+				idWebView.getEngine().loadContent(
+						"<iframe width=\"640\" height=\"380\" src=\"http://www.youtube.com/embed/" + getLink(lines.get(size-1))
+								+ "\" frameborder=\"0\" allowfullscreen></iframe>");
+			}
+		});
+		idMRecent2.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent arg0) {
+				primaryStage.setTitle(idMRecent2.getText());
+				idWebView.getEngine().loadContent(
+						"<iframe width=\"640\" height=\"380\" src=\"http://www.youtube.com/embed/" + getLink(lines.get(size-1))
+								+ "\" frameborder=\"0\" allowfullscreen></iframe>");
+			}
+		});
+		
+		idMRecent3.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent arg0) {
+				primaryStage.setTitle(idMRecent3.getText());
+				idWebView.getEngine().loadContent(
+						"<iframe width=\"640\" height=\"380\" src=\"http://www.youtube.com/embed/" + getLink(lines.get(size-1))
+								+ "\" frameborder=\"0\" allowfullscreen></iframe>");
+			}
+		});
+		
+		idMRecent4.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent arg0) {
+				primaryStage.setTitle(idMRecent4.getText());
+				idWebView.getEngine().loadContent(
+						"<iframe width=\"640\" height=\"380\" src=\"http://www.youtube.com/embed/" + getLink(lines.get(size-1))
+								+ "\" frameborder=\"0\" allowfullscreen></iframe>");
+			}
+		});
+		idMRecent5.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent arg0) {
+				primaryStage.setTitle(idMRecent5.getText());
+				idWebView.getEngine().loadContent(
+						"<iframe width=\"640\" height=\"380\" src=\"http://www.youtube.com/embed/" + getLink(lines.get(size-1))
+								+ "\" frameborder=\"0\" allowfullscreen></iframe>");
+			}
+		});
+		idMRecent6.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent arg0) {
+				primaryStage.setTitle(idMRecent6.getText());
+				idWebView.getEngine().loadContent(
+						"<iframe width=\"640\" height=\"380\" src=\"http://www.youtube.com/embed/" + getLink(lines.get(size-1))
+								+ "\" frameborder=\"0\" allowfullscreen></iframe>");
+			}
+		});
+		
+		idMRecent7.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent arg0) {
+				primaryStage.setTitle(idMRecent7.getText());
+				idWebView.getEngine().loadContent(
+						"<iframe width=\"640\" height=\"380\" src=\"http://www.youtube.com/embed/" + getLink(lines.get(size-1))
+								+ "\" frameborder=\"0\" allowfullscreen></iframe>");
+			}
+		});
+
+		idMClearRecent.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent arg0) {
+				try {
+					String filename = "log_online.txt";
+					FileWriter fw = new FileWriter(filename, true);
+					fw.write("");
+					fw.close();
+				} catch (IOException ioe) {
+					System.err.println("IOException: " + ioe.getMessage());
+				}
+			}
+		});
+	}
+	
+	private String getLink (String link){
+		String id = null;
+		for (int i = 0; i < link.length(); i++) {
+			if (link.charAt(i) == 'v') {
+				for (int j = i + 2; j < link.length(); j++) {
+					id += link.charAt(j);
+					if (link.charAt(j + 1) == '&')
+						break;
+				}
+			}
+		}
+		return id;
 	}
 
 }
