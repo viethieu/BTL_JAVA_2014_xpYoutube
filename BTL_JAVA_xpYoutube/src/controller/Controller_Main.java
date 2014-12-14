@@ -55,15 +55,16 @@ import javafx.util.Duration;
 
 public class Controller_Main implements Initializable {
 	private boolean endOfMedia = false;
-	private String str;
-	private Media pick;
+	private String str, name;
+	private URL url;
 	public MediaPlayer player;
 	private Duration duration;
 	private double volume;
 	String link = null;
 	private List<Item> list;
 	ObservableList<Item> observableList = FXCollections.observableArrayList();
-	private Stage stage = null;
+	private Stage stageSearch = null;
+	private Stage primaryStage;
 	private Scene scene;
 	private Pane pane;
 
@@ -107,7 +108,7 @@ public class Controller_Main implements Initializable {
 			player.setVolume(0.5);
 			idPIn.setProgress(0.5);
 		}
-		Stage primaryStage = new Stage();
+		primaryStage = new Stage();
 		primaryStage.setTitle(str1);
 		Image iconSoftWare = new Image("/giaoDien/iconMovie.png");
 		primaryStage.getIcons().add(iconSoftWare);
@@ -323,9 +324,9 @@ public class Controller_Main implements Initializable {
 					System.out.println(list);
 					
 					Controller_Search ctrl = new Controller_Search(list);
-					if (stage != null)
-						stage.close();
-					stage = ctrl.launch();
+					if (stageSearch != null)
+						stageSearch.close();
+					stageSearch = ctrl.launch();
 				}
 			}
 		});
@@ -362,9 +363,9 @@ public class Controller_Main implements Initializable {
 				System.out.println(list);
 
 				Controller_Search ctrl = new Controller_Search(list);
-				if (stage != null)
-					stage.close();
-				stage = ctrl.launch();
+				if (stageSearch != null)
+					stageSearch.close();
+				stageSearch = ctrl.launch();
 			}
 		});
 
@@ -505,41 +506,18 @@ public class Controller_Main implements Initializable {
 				final FileChooser fileChooser = new FileChooser();
 				Stage stage = new Stage();
 				File file = fileChooser.showOpenDialog(stage);
+				name = file.getAbsolutePath();
+				
 				if (file != null) {
-					// System.out.println(file.getAbsolutePath());
-					// openFile(file);
-					// Controller_Main ctrl = new Controller_Main();
-					// try {
-					// Writer
-					// //PrintWriter log_off = new PrintWriter(new
-					// FileWriter("log_offline.txt"));
-					// PrintWriter log_off= new PrintWriter(filename,true);
-					// log_off.println("file:///" + file.getAbsolutePath());
-					// log_off.flush();
-					//
-					// } catch (IOException e) {
-					// // TODO Auto-generated catch block
-					// e.printStackTrace();
-					// }
-
-					// player.stop();
 					try {
 						File filename = new File("log_offline.txt");
 						FileWriter fw = new FileWriter(filename, true);
-						fw.write(file.getAbsolutePath() + "\n");// appends the
+						fw.write(name + "\n");// appends the
 																// string to the
 																// file
 						fw.close();
 					} catch (IOException ioe) {
 						System.err.println("IOException: " + ioe.getMessage());
-					}
-
-					URL url = null;
-					try {
-						url = new URL("file:///" + file.getAbsolutePath());
-						System.out.println(url);
-					} catch (MalformedURLException e) {
-						e.printStackTrace();
 					}
 					
 					if (player != null) {
@@ -547,7 +525,7 @@ public class Controller_Main implements Initializable {
 						idPlay.setText(">");
 					}
 					
-					Media media = new Media(url.toString());
+					Media media = new Media(getNameMeida(name).toString());
 					player = new MediaPlayer(media);
 
 					final DoubleProperty width = idMediaView.fitWidthProperty();
@@ -561,10 +539,7 @@ public class Controller_Main implements Initializable {
 					idMediaView.setMediaPlayer(player);
 					player.setVolume(0.5);
 					idPIn.setProgress(0.5);
-
-					// ctrl.launch("Test", "file:///" + file.getAbsolutePath());
 				}
-
 			}
 		});
 
@@ -666,14 +641,8 @@ public class Controller_Main implements Initializable {
 					player.stop();
 					idPlay.setText(">");
 				}
-				URL url = null;
-				try {
-					url = new URL("file:///" + idMRecent1.getText());
-					System.out.println(url);
-				} catch (MalformedURLException e) {
-					e.printStackTrace();
-				}
-				Media media = new Media(url.toString());
+				
+				Media media = new Media(getNameMeida(idMRecent1.getText()).toString());
 				player = new MediaPlayer(media);
 
 				final DoubleProperty width = idMediaView.fitWidthProperty();
@@ -699,14 +668,8 @@ public class Controller_Main implements Initializable {
 					player.stop();
 					idPlay.setText(">");
 				}
-				URL url = null;
-				try {
-					url = new URL("file:///" + idMRecent2.getText());
-					System.out.println(url);
-				} catch (MalformedURLException e) {
-					e.printStackTrace();
-				}
-				Media media = new Media(url.toString());
+				
+				Media media = new Media(getNameMeida(idMRecent2.getText()).toString());
 				player = new MediaPlayer(media);
 
 				final DoubleProperty width = idMediaView.fitWidthProperty();
@@ -732,14 +695,8 @@ public class Controller_Main implements Initializable {
 					player.stop();
 					idPlay.setText(">");
 				}
-				URL url = null;
-				try {
-					url = new URL("file:///" + idMRecent3.getText());
-					System.out.println(url);
-				} catch (MalformedURLException e) {
-					e.printStackTrace();
-				}
-				Media media = new Media(url.toString());
+				
+				Media media = new Media(getNameMeida(idMRecent3.getText()).toString());
 				player = new MediaPlayer(media);
 
 				final DoubleProperty width = idMediaView.fitWidthProperty();
@@ -765,14 +722,8 @@ public class Controller_Main implements Initializable {
 					player.stop();
 					idPlay.setText(">");
 				}
-				URL url = null;
-				try {
-					url = new URL("file:///" + idMRecent4.getText());
-					System.out.println(url);
-				} catch (MalformedURLException e) {
-					e.printStackTrace();
-				}
-				Media media = new Media(url.toString());
+				
+				Media media = new Media(getNameMeida(idMRecent4.getText()).toString());
 				player = new MediaPlayer(media);
 
 				final DoubleProperty width = idMediaView.fitWidthProperty();
@@ -798,14 +749,8 @@ public class Controller_Main implements Initializable {
 					player.stop();
 					idPlay.setText(">");
 				}
-				URL url = null;
-				try {
-					url = new URL("file:///" + idMRecent5.getText());
-					System.out.println(url);
-				} catch (MalformedURLException e) {
-					e.printStackTrace();
-				}
-				Media media = new Media(url.toString());
+				
+				Media media = new Media(getNameMeida(idMRecent5.getText()).toString());
 				player = new MediaPlayer(media);
 
 				final DoubleProperty width = idMediaView.fitWidthProperty();
@@ -831,14 +776,8 @@ public class Controller_Main implements Initializable {
 					player.stop();
 					idPlay.setText(">");
 				}
-				URL url = null;
-				try {
-					url = new URL("file:///" + idMRecent6.getText());
-					System.out.println(url);
-				} catch (MalformedURLException e) {
-					e.printStackTrace();
-				}
-				Media media = new Media(url.toString());
+				
+				Media media = new Media(getNameMeida(idMRecent6.getText()).toString());
 				player = new MediaPlayer(media);
 
 				final DoubleProperty width = idMediaView.fitWidthProperty();
@@ -864,14 +803,8 @@ public class Controller_Main implements Initializable {
 					player.stop();
 					idPlay.setText(">");
 				}
-				URL url = null;
-				try {
-					url = new URL("file:///" + idMRecent7.getText());
-					System.out.println(url);
-				} catch (MalformedURLException e) {
-					e.printStackTrace();
-				}
-				Media media = new Media(url.toString());
+				
+				Media media = new Media(getNameMeida(idMRecent7.getText()).toString());
 				player = new MediaPlayer(media);
 
 				final DoubleProperty width = idMediaView.fitWidthProperty();
@@ -934,5 +867,20 @@ public class Controller_Main implements Initializable {
 					intLengthM, intLengthS);
 		else
 			return String.format("%02d:%02d/%02d:%02d", intCountM, intCountS, intLengthM, intLengthS);
+	}
+	
+	private URL getNameMeida (String name) {
+		String fix = "file:///" + name.replaceAll(" ", "%20");
+		int cuoi= name.lastIndexOf(".");
+		int dau= name.lastIndexOf("\\");
+		String title= name.substring(dau+1, cuoi);
+		primaryStage.setTitle(title + " - Xem phim Offline");
+		try {
+			url = new URL(fix);
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return url;
 	}
 }

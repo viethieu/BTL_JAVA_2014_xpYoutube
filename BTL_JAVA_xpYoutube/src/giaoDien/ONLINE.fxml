@@ -9,7 +9,7 @@
 
 <Pane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="443.0" prefWidth="660.0" style="-fx-background-color: #d3d3d3;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <MenuBar layoutX="14.0" layoutY="8.0" prefHeight="31.0" prefWidth="91.0" style="-fx-background-color: #d3d3d3;">
+      <MenuBar layoutY="8.0" prefHeight="31.0" prefWidth="91.0" style="-fx-background-color: #d3d3d3;">
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
