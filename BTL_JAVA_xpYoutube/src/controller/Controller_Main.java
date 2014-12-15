@@ -41,6 +41,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
@@ -407,10 +408,10 @@ public class Controller_Main implements Initializable {
 		});
 
 		// Su kien khi click vao man hinh
-		idMediaView.setOnMouseClicked(new EventHandler<Event>() {
+		idMediaView.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
 			@Override
-			public void handle(Event arg0) {
+			public void handle(MouseEvent click) {
 				Status status = player.getStatus();
 				if (status == Status.PAUSED || status == Status.READY || status == Status.STOPPED) {
 					if (endOfMedia) {
@@ -421,6 +422,10 @@ public class Controller_Main implements Initializable {
 					player.play();
 				} else {
 					player.pause();
+				}
+				if (click.getClickCount() == 2){
+					fullScreen ctl = new fullScreen();
+					ctl.lauch(getNameMeida(name), player.getCurrentTime().toSeconds());
 				}
 			}
 
@@ -442,8 +447,8 @@ public class Controller_Main implements Initializable {
 
 			@Override
 			public void handle(ActionEvent arg0) {
-				// TODO Auto-generated method stub
-
+				fullScreen ctl = new fullScreen();
+				ctl.lauch(getNameMeida(name), player.getCurrentTime().toSeconds());
 			}
 		});
 
@@ -636,8 +641,8 @@ public class Controller_Main implements Initializable {
 					player.stop();
 					idPlay.setText(">");
 				}
-
-				Media media = new Media(getNameMeida(idMRecent1.getText()).toString());
+				name = idMRecent1.getText();
+				Media media = new Media(getNameMeida(name).toString());
 				player = new MediaPlayer(media);
 
 				final DoubleProperty width = idMediaView.fitWidthProperty();
@@ -664,7 +669,9 @@ public class Controller_Main implements Initializable {
 					idPlay.setText(">");
 				}
 
-				Media media = new Media(getNameMeida(idMRecent2.getText()).toString());
+
+				name = idMRecent2.getText();
+				Media media = new Media(getNameMeida(name).toString());
 				player = new MediaPlayer(media);
 
 				final DoubleProperty width = idMediaView.fitWidthProperty();
@@ -691,7 +698,9 @@ public class Controller_Main implements Initializable {
 					idPlay.setText(">");
 				}
 
-				Media media = new Media(getNameMeida(idMRecent3.getText()).toString());
+
+				name = idMRecent3.getText();
+				Media media = new Media(getNameMeida(name).toString());
 				player = new MediaPlayer(media);
 
 				final DoubleProperty width = idMediaView.fitWidthProperty();
@@ -718,7 +727,9 @@ public class Controller_Main implements Initializable {
 					idPlay.setText(">");
 				}
 
-				Media media = new Media(getNameMeida(idMRecent4.getText()).toString());
+
+				name = idMRecent4.getText();
+				Media media = new Media(getNameMeida(name).toString());
 				player = new MediaPlayer(media);
 
 				final DoubleProperty width = idMediaView.fitWidthProperty();
@@ -745,7 +756,9 @@ public class Controller_Main implements Initializable {
 					idPlay.setText(">");
 				}
 
-				Media media = new Media(getNameMeida(idMRecent5.getText()).toString());
+
+				name = idMRecent5.getText();
+				Media media = new Media(getNameMeida(name).toString());
 				player = new MediaPlayer(media);
 
 				final DoubleProperty width = idMediaView.fitWidthProperty();
@@ -772,7 +785,9 @@ public class Controller_Main implements Initializable {
 					idPlay.setText(">");
 				}
 
-				Media media = new Media(getNameMeida(idMRecent6.getText()).toString());
+
+				name = idMRecent6.getText();
+				Media media = new Media(getNameMeida(name).toString());
 				player = new MediaPlayer(media);
 
 				final DoubleProperty width = idMediaView.fitWidthProperty();
@@ -799,7 +814,9 @@ public class Controller_Main implements Initializable {
 					idPlay.setText(">");
 				}
 
-				Media media = new Media(getNameMeida(idMRecent7.getText()).toString());
+
+				name = idMRecent7.getText();
+				Media media = new Media(getNameMeida(name).toString());
 				player = new MediaPlayer(media);
 
 				final DoubleProperty width = idMediaView.fitWidthProperty();
