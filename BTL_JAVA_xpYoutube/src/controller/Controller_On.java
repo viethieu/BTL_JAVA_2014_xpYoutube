@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -307,8 +308,17 @@ public class Controller_On implements Initializable {
 			public void handle(ActionEvent arg0) {
 				primaryStage.setTitle(idMRecent1.getText());
 				idWebView.getEngine().loadContent(
-						"<iframe width=\"640\" height=\"380\" src=\"http://www.youtube.com/embed/" + getLink(lines.get(size-1))
+						"<iframe width=\"1360\" height=\"768\" src=\"http://www.youtube.com/embed/" + getLink(lines.get(size-1))
 								+ "\" frameborder=\"0\" allowfullscreen></iframe>");
+				try {
+					String filename = "log_online.txt";
+					FileWriter fw = new FileWriter(filename, true);
+					fw.write(idMRecent1.getText() + "\n");
+					fw.write(lines.get(size-1) + "\n");
+					fw.close();
+				} catch (IOException ioe) {
+					System.err.println("IOException: " + ioe.getMessage());
+				}
 			}
 		});
 		idMRecent2.setOnAction(new EventHandler<ActionEvent>() {
@@ -317,8 +327,17 @@ public class Controller_On implements Initializable {
 			public void handle(ActionEvent arg0) {
 				primaryStage.setTitle(idMRecent2.getText());
 				idWebView.getEngine().loadContent(
-						"<iframe width=\"640\" height=\"380\" src=\"http://www.youtube.com/embed/" + getLink(lines.get(size-1))
+						"<iframe width=\"1360\" height=\"768\" src=\"http://www.youtube.com/embed/" + getLink(lines.get(size-3))
 								+ "\" frameborder=\"0\" allowfullscreen></iframe>");
+				try {
+					String filename = "log_online.txt";
+					FileWriter fw = new FileWriter(filename, true);
+					fw.write(idMRecent2.getText() + "\n");
+					fw.write(lines.get(size-3) + "\n");
+					fw.close();
+				} catch (IOException ioe) {
+					System.err.println("IOException: " + ioe.getMessage());
+				}
 			}
 		});
 		
@@ -328,8 +347,17 @@ public class Controller_On implements Initializable {
 			public void handle(ActionEvent arg0) {
 				primaryStage.setTitle(idMRecent3.getText());
 				idWebView.getEngine().loadContent(
-						"<iframe width=\"640\" height=\"380\" src=\"http://www.youtube.com/embed/" + getLink(lines.get(size-1))
+						"<iframe width=\"1360\" height=\"768\" src=\"http://www.youtube.com/embed/" + getLink(lines.get(size-5))
 								+ "\" frameborder=\"0\" allowfullscreen></iframe>");
+				try {
+					String filename = "log_online.txt";
+					FileWriter fw = new FileWriter(filename, true);
+					fw.write(idMRecent3.getText() + "\n");
+					fw.write(lines.get(size-5) + "\n");
+					fw.close();
+				} catch (IOException ioe) {
+					System.err.println("IOException: " + ioe.getMessage());
+				}
 			}
 		});
 		
@@ -339,8 +367,17 @@ public class Controller_On implements Initializable {
 			public void handle(ActionEvent arg0) {
 				primaryStage.setTitle(idMRecent4.getText());
 				idWebView.getEngine().loadContent(
-						"<iframe width=\"640\" height=\"380\" src=\"http://www.youtube.com/embed/" + getLink(lines.get(size-1))
+						"<iframe width=\"1360\" height=\"768\" src=\"http://www.youtube.com/embed/" + getLink(lines.get(size-7))
 								+ "\" frameborder=\"0\" allowfullscreen></iframe>");
+				try {
+					String filename = "log_online.txt";
+					FileWriter fw = new FileWriter(filename, true);
+					fw.write(idMRecent4.getText() + "\n");
+					fw.write(lines.get(size-7) + "\n");
+					fw.close();
+				} catch (IOException ioe) {
+					System.err.println("IOException: " + ioe.getMessage());
+				}
 			}
 		});
 		idMRecent5.setOnAction(new EventHandler<ActionEvent>() {
@@ -349,8 +386,17 @@ public class Controller_On implements Initializable {
 			public void handle(ActionEvent arg0) {
 				primaryStage.setTitle(idMRecent5.getText());
 				idWebView.getEngine().loadContent(
-						"<iframe width=\"640\" height=\"380\" src=\"http://www.youtube.com/embed/" + getLink(lines.get(size-1))
+						"<iframe width=\"1360\" height=\"768\" src=\"http://www.youtube.com/embed/" + getLink(lines.get(size-9))
 								+ "\" frameborder=\"0\" allowfullscreen></iframe>");
+				try {
+					String filename = "log_online.txt";
+					FileWriter fw = new FileWriter(filename, true);
+					fw.write(idMRecent5.getText() + "\n");
+					fw.write(lines.get(size-9) + "\n");
+					fw.close();
+				} catch (IOException ioe) {
+					System.err.println("IOException: " + ioe.getMessage());
+				}
 			}
 		});
 		idMRecent6.setOnAction(new EventHandler<ActionEvent>() {
@@ -359,9 +405,19 @@ public class Controller_On implements Initializable {
 			public void handle(ActionEvent arg0) {
 				primaryStage.setTitle(idMRecent6.getText());
 				idWebView.getEngine().loadContent(
-						"<iframe width=\"640\" height=\"380\" src=\"http://www.youtube.com/embed/" + getLink(lines.get(size-1))
+						"<iframe width=\"1360\" height=\"768\" src=\"http://www.youtube.com/embed/" + getLink(lines.get(size-11))
 								+ "\" frameborder=\"0\" allowfullscreen></iframe>");
+				try {
+					String filename = "log_online.txt";
+					FileWriter fw = new FileWriter(filename, true);
+					fw.write(idMRecent6.getText() + "\n");
+					fw.write(lines.get(size-11) + "\n");
+					fw.close();
+				} catch (IOException ioe) {
+					System.err.println("IOException: " + ioe.getMessage());
+				}
 			}
+			
 		});
 		
 		idMRecent7.setOnAction(new EventHandler<ActionEvent>() {
@@ -370,8 +426,17 @@ public class Controller_On implements Initializable {
 			public void handle(ActionEvent arg0) {
 				primaryStage.setTitle(idMRecent7.getText());
 				idWebView.getEngine().loadContent(
-						"<iframe width=\"640\" height=\"380\" src=\"http://www.youtube.com/embed/" + getLink(lines.get(size-1))
+						"<iframe width=\"1360\" height=\"768\" src=\"http://www.youtube.com/embed/" + getLink(lines.get(size-13))
 								+ "\" frameborder=\"0\" allowfullscreen></iframe>");
+				try {
+					String filename = "log_online.txt";
+					FileWriter fw = new FileWriter(filename, true);
+					fw.write(idMRecent7.getText() + "\n");
+					fw.write(lines.get(size-13) + "\n");
+					fw.close();
+				} catch (IOException ioe) {
+					System.err.println("IOException: " + ioe.getMessage());
+				}
 			}
 		});
 
@@ -380,13 +445,20 @@ public class Controller_On implements Initializable {
 			@Override
 			public void handle(ActionEvent arg0) {
 				try {
-					String filename = "log_online.txt";
-					FileWriter fw = new FileWriter(filename, true);
-					fw.write("");
-					fw.close();
-				} catch (IOException ioe) {
-					System.err.println("IOException: " + ioe.getMessage());
+					PrintWriter out= new PrintWriter(new FileWriter("log_online.txt"));
+					out.print("");
+				} catch (IOException e) {
+					e.printStackTrace();
 				}
+				
+				size = 0;
+				idMRecent1.setVisible(false);
+				idMRecent2.setVisible(false);
+				idMRecent3.setVisible(false);
+				idMRecent4.setVisible(false);
+				idMRecent5.setVisible(false);
+				idMRecent6.setVisible(false);
+				idMRecent7.setVisible(false);
 			}
 		});
 	}

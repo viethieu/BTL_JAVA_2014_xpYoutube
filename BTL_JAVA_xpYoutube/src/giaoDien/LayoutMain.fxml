@@ -109,14 +109,38 @@
                <children>
                   <HBox layoutY="388.0" prefHeight="35.0" prefWidth="600.0" style="-fx-background-color: #d3d3d3;">
                      <children>
-                        <Button fx:id="idPlay" mnemonicParsing="false" prefHeight="23.0" prefWidth="44.0" style="-fx-padding: 7 0 7 0;" text="Play" />
-                        <Button fx:id="idStop" mnemonicParsing="false" prefHeight="26.0" prefWidth="48.0" style="-fx-padding: 7 0 7 0;" text="Stop" />
-                        <Button fx:id="idFullScreen" mnemonicParsing="false" prefHeight="22.0" prefWidth="83.0" style="-fx-padding: 7 0 7 0;" text="Full Screen" />
-                        <Region prefHeight="35.0" prefWidth="242.0" />
+                        <ImageView fx:id="idPlay" fitHeight="40.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/play.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="idStop" fitHeight="35.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/stop.png" />
+                           </image>
+                        </ImageView>
+                        <Region prefHeight="35.0" prefWidth="242.0" HBox.hgrow="ALWAYS" />
                         <Label prefHeight="32.0" prefWidth="32.0" text="Vol:" />
                         <Slider fx:id="idVolume" prefHeight="41.0" prefWidth="98.0" />
-                        <Region prefHeight="35.0" prefWidth="14.0" />
-                        <Button fx:id="idMute" alignment="CENTER" mnemonicParsing="false" style="-fx-padding: 7 9 7 9;" text="x" />
+                        <Region prefHeight="35.0" prefWidth="7.0" />
+                        <ImageView fx:id="idMute" fitHeight="21.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/volume.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets top="6.0" />
+                           </HBox.margin>
+                        </ImageView>
+                        <Region prefHeight="35.0" prefWidth="9.0" />
+                        <ImageView fx:id="idFullScreen" fitHeight="26.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../image/fullscreen.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets top="5.0" />
+                           </HBox.margin>
+                        </ImageView>
+                        <Region prefHeight="35.0" prefWidth="9.0" />
                      </children>
                   </HBox>
                </children>

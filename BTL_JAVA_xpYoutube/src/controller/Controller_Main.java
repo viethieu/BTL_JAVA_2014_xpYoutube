@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -58,6 +59,7 @@ import javafx.util.Duration;
 public class Controller_Main implements Initializable {
 	private boolean endOfMedia = false;
 	private String str, name;
+	private int size;
 	private URL url;
 	public MediaPlayer player = null;
 	private Duration duration;
@@ -69,6 +71,10 @@ public class Controller_Main implements Initializable {
 	private Stage primaryStage;
 	private Scene scene;
 	private Pane pane;
+	Image image1 = new Image("/image/play.png");
+	Image image2 = new Image("/image/pause.png");
+	Image image3 = new Image("/image/muted.png");
+	Image image4 = new Image("/image/volume.png");
 
 	/***********************************************************
 	 * 
@@ -137,15 +143,15 @@ public class Controller_Main implements Initializable {
 	@FXML
 	private ImageView idSearch;
 	@FXML
-	private Button idPlay;
+	private ImageView idPlay;
 	@FXML
 	private MediaView idMediaView;
 	@FXML
-	private Button idStop;
+	private ImageView idStop;
 	@FXML
-	private Button idMute;
+	private ImageView idMute;
 	@FXML
-	private Button idFullScreen;
+	private ImageView idFullScreen;
 	@FXML
 	private Slider idSliderTime;
 	@FXML
@@ -220,13 +226,13 @@ public class Controller_Main implements Initializable {
 	@FXML
 	private void mStop() {
 		player.stop();
-		idPlay.setText(">");
+		idPlay.setImage(image1);
 	}
 
 	@FXML
 	private void mPlay() {
 		player.play();
-		idPlay.setText("||");
+		idPlay.setImage(image2);
 
 		player.currentTimeProperty().addListener(new InvalidationListener() {
 			public void invalidated(Observable ov) {
@@ -238,7 +244,7 @@ public class Controller_Main implements Initializable {
 	@FXML
 	private void mPause() {
 		player.pause();
-		idPlay.setText(">");
+		idPlay.setImage(image1);
 	}
 
 	@FXML
@@ -257,10 +263,14 @@ public class Controller_Main implements Initializable {
 
 	@FXML
 	private void mVolumeMute() {
-		if (player.isMute() == true)
+		if (player.isMute() == true){
 			player.setMute(false);
-		else
+			idMute.setImage(image4);
+		}
+		else {
 			player.setMute(true);
+			idMute.setImage(image3);
+		}
 	}
 
 	@FXML
@@ -380,9 +390,10 @@ public class Controller_Main implements Initializable {
 		});
 
 		// Su kien nut Play/Pause
-		idPlay.setOnAction(new EventHandler<ActionEvent>() {
+		idPlay.setOnMouseClicked(new EventHandler<Event>() {
+
 			@Override
-			public void handle(ActionEvent arg0) {
+			public void handle(Event arg0) {
 
 				Status status = player.getStatus();
 				if (status == Status.UNKNOWN || status == Status.HALTED) {
@@ -392,19 +403,21 @@ public class Controller_Main implements Initializable {
 
 				if (status == Status.PAUSED || status == Status.READY || status == Status.STOPPED) {
 					player.play();
+
+					player.setCycleCount(10);
 				} else {
 					player.pause();
 				}
 
 				player.setOnPaused(new Runnable() {
 					public void run() {
-						idPlay.setText(">");
+						idPlay.setImage(image1);
 					}
 				});
 
 				player.setOnPlaying(new Runnable() {
 					public void run() {
-						idPlay.setText("||");
+						idPlay.setImage(image2);
 					}
 				});
 
@@ -443,21 +456,22 @@ public class Controller_Main implements Initializable {
 		});
 
 		// Su kien nut Stop
-		idStop.setOnAction(new EventHandler<ActionEvent>() {
+		idStop.setOnMouseClicked(new EventHandler<Event>() {
 
 			@Override
-			public void handle(ActionEvent arg0) {
+			public void handle(Event arg0) {
 				// TODO Auto-generated method stub
 				player.stop();
-				idPlay.setText(">");
+				idPlay.setImage(image1);
+				
 			}
 		});
-
+		
 		// su kien nut thu phong man hinh
-		idFullScreen.setOnAction(new EventHandler<ActionEvent>() {
+		idFullScreen.setOnMouseClicked(new EventHandler<Event>() {
 
 			@Override
-			public void handle(ActionEvent arg0) {
+			public void handle(Event arg0) {
 				fullScreen ctl = new fullScreen();
 				ctl.lauch(getNameMeida(name), player.getCurrentTime().toSeconds());
 			}
@@ -498,15 +512,19 @@ public class Controller_Main implements Initializable {
 			}
 		});
 
-		idMute.setOnAction(new EventHandler<ActionEvent>() {
+		idMute.setOnMouseClicked(new EventHandler<Event>() {
 
 			@Override
-			public void handle(ActionEvent arg0) {
+			public void handle(Event arg0) {
 				// TODO Auto-generated method stub
-				if (player.isMute() == true)
+				if (player.isMute() == true) {
 					player.setMute(false);
-				else
+					idMute.setImage(image4);
+				}
+				else {
 					player.setMute(true);
+					idMute.setImage(image3);
+				}
 			}
 		});
 
@@ -534,7 +552,7 @@ public class Controller_Main implements Initializable {
 
 					if (player != null) {
 						player.stop();
-						idPlay.setText(">");
+						idPlay.setImage(image1);
 					}
 
 					Media media = new Media(getNameMeida(name).toString());
@@ -572,7 +590,7 @@ public class Controller_Main implements Initializable {
 					System.out.println("Exception caught : " + e);
 				}
 
-				int size = lines.size();
+				size = lines.size();
 
 				if (size == 0) {
 					idMRecent1.setVisible(false);
@@ -650,7 +668,7 @@ public class Controller_Main implements Initializable {
 			public void handle(ActionEvent arg0) {
 				if (player != null) {
 					player.stop();
-					idPlay.setText(">");
+					idPlay.setImage(image1);
 				}
 				name = idMRecent1.getText();
 				Media media = new Media(getNameMeida(name).toString());
@@ -677,7 +695,7 @@ public class Controller_Main implements Initializable {
 			public void handle(ActionEvent arg0) {
 				if (player != null) {
 					player.stop();
-					idPlay.setText(">");
+					idPlay.setImage(image1);
 				}
 
 				name = idMRecent2.getText();
@@ -705,7 +723,7 @@ public class Controller_Main implements Initializable {
 			public void handle(ActionEvent arg0) {
 				if (player != null) {
 					player.stop();
-					idPlay.setText(">");
+					idPlay.setImage(image1);
 				}
 
 				name = idMRecent3.getText();
@@ -733,7 +751,7 @@ public class Controller_Main implements Initializable {
 			public void handle(ActionEvent arg0) {
 				if (player != null) {
 					player.stop();
-					idPlay.setText(">");
+					idPlay.setImage(image1);
 				}
 
 				name = idMRecent4.getText();
@@ -761,7 +779,7 @@ public class Controller_Main implements Initializable {
 			public void handle(ActionEvent arg0) {
 				if (player != null) {
 					player.stop();
-					idPlay.setText(">");
+					idPlay.setImage(image1);
 				}
 
 				name = idMRecent5.getText();
@@ -789,7 +807,7 @@ public class Controller_Main implements Initializable {
 			public void handle(ActionEvent arg0) {
 				if (player != null) {
 					player.stop();
-					idPlay.setText(">");
+					idPlay.setImage(image1);
 				}
 
 				name = idMRecent6.getText();
@@ -817,7 +835,7 @@ public class Controller_Main implements Initializable {
 			public void handle(ActionEvent arg0) {
 				if (player != null) {
 					player.stop();
-					idPlay.setText(">");
+					idPlay.setImage(image1);
 				}
 
 				name = idMRecent7.getText();
@@ -837,6 +855,29 @@ public class Controller_Main implements Initializable {
 				idVolume.setValue(50);
 
 				// ctrl.launch("Test", "file:///" + file.getAbsolutePath());
+			}
+		});
+		
+		idMClearRecent.setOnAction(new EventHandler<ActionEvent>() {
+			
+			@Override
+			public void handle(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				try {
+					PrintWriter out= new PrintWriter(new FileWriter("log_offline.txt"));
+					out.print("");
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				
+				size = 0;
+				idMRecent1.setVisible(false);
+				idMRecent2.setVisible(false);
+				idMRecent3.setVisible(false);
+				idMRecent4.setVisible(false);
+				idMRecent5.setVisible(false);
+				idMRecent6.setVisible(false);
+				idMRecent7.setVisible(false);
 			}
 		});
 

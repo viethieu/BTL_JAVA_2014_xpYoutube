@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.web.*?>
 <?import javafx.scene.control.*?>
@@ -7,49 +8,65 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<Pane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="443.0" prefWidth="660.0" style="-fx-background-color: #d3d3d3;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="400.0" prefWidth="660.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <MenuBar layoutY="8.0" prefHeight="31.0" prefWidth="91.0" style="-fx-background-color: #d3d3d3;">
-        <menus>
-          <Menu mnemonicParsing="false" text="File">
-            <items>
-              <MenuItem fx:id="idMOpen" mnemonicParsing="false" text="Open file" />
-                  <Menu fx:id="idMRecent" mnemonicParsing="false" text="Recents...">
-                     <items>
-                        <MenuItem fx:id="idMRecent1" mnemonicParsing="false" />
-                        <MenuItem fx:id="idMRecent2" mnemonicParsing="false" />
-                        <MenuItem fx:id="idMRecent3" mnemonicParsing="false" />
-                        <MenuItem fx:id="idMRecent4" mnemonicParsing="false" />
-                        <MenuItem fx:id="idMRecent5" mnemonicParsing="false" />
-                        <MenuItem fx:id="idMRecent6" mnemonicParsing="false" />
-                        <MenuItem fx:id="idMRecent7" mnemonicParsing="false" />
-                        <MenuItem fx:id="idMClearRecent" mnemonicParsing="false" text="Clear Recent list" />
-                     </items>
-                  </Menu>
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <items>
-              <MenuItem fx:id="idMAbout" mnemonicParsing="false" text="About team" />
-            </items>
-          </Menu>
-        </menus>
-      </MenuBar>
-      <TextField fx:id="idTextSearch" layoutX="364.0" layoutY="8.0" prefHeight="31.0" prefWidth="279.0" promptText="film" style="-fx-padding: 0 40 0 40;" />
-      <StackPane layoutY="48.0">
+      <HBox alignment="CENTER_LEFT" layoutY="8.0" prefHeight="41.0" prefWidth="660.0" style="-fx-background-color: #d3d3d3;" VBox.vgrow="NEVER">
          <children>
-            <WebView fx:id="idWebView" layoutY="48.0" prefHeight="400.0" prefWidth="660.0" />
+            <MenuBar layoutY="8.0" prefHeight="31.0" prefWidth="91.0" style="-fx-background-color: #d3d3d3;">
+              <menus>
+                <Menu mnemonicParsing="false" text="File">
+                  <items>
+                    <MenuItem fx:id="idMOpen" mnemonicParsing="false" text="Open file" />
+                        <Menu fx:id="idMRecent" mnemonicParsing="false" text="Recents...">
+                           <items>
+                              <MenuItem fx:id="idMRecent1" mnemonicParsing="false" />
+                              <MenuItem fx:id="idMRecent2" mnemonicParsing="false" />
+                              <MenuItem fx:id="idMRecent3" mnemonicParsing="false" />
+                              <MenuItem fx:id="idMRecent4" mnemonicParsing="false" />
+                              <MenuItem fx:id="idMRecent5" mnemonicParsing="false" />
+                              <MenuItem fx:id="idMRecent6" mnemonicParsing="false" />
+                              <MenuItem fx:id="idMRecent7" mnemonicParsing="false" />
+                              <MenuItem fx:id="idMClearRecent" mnemonicParsing="false" text="Clear Recent list" />
+                           </items>
+                        </Menu>
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                  <items>
+                    <MenuItem fx:id="idMAbout" mnemonicParsing="false" text="About team" />
+                  </items>
+                </Menu>
+              </menus>
+               <HBox.margin>
+                  <Insets top="5.0" />
+               </HBox.margin>
+            </MenuBar>
+            <Region prefHeight="39.0" prefWidth="262.0" HBox.hgrow="ALWAYS" />
+            <Pane layoutX="364.0" layoutY="8.0">
+               <children>
+                  <TextField fx:id="idTextSearch" prefHeight="31.0" prefWidth="279.0" promptText="film" style="-fx-padding: 0 40 0 40;" />
+                  <ImageView fitHeight="31.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/yt.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="idSearch" fitHeight="31.0" fitWidth="40.0" layoutX="250.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/search.png" />
+                     </image>
+                  </ImageView>
+               </children>
+               <HBox.margin>
+                  <Insets top="3.0" />
+               </HBox.margin>
+            </Pane>
+            <ImageView fitHeight="28.0" fitWidth="14.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </HBox>
+      <StackPane alignment="TOP_LEFT" layoutY="48.0" prefHeight="367.0" prefWidth="660.0" VBox.vgrow="ALWAYS">
+         <children>
+            <WebView fx:id="idWebView" layoutY="48.0" prefHeight="768.0" prefWidth="1366.0" />
          </children>
       </StackPane>
-      <ImageView fx:id="idSearch" fitHeight="31.0" fitWidth="40.0" layoutX="612.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../image/search.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="31.0" fitWidth="40.0" layoutX="364.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../image/yt.png" />
-         </image>
-      </ImageView>
    </children>
-</Pane>
+</VBox>
