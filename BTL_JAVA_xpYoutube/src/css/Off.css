@@ -1,9 +1,36 @@
-#idSearchText {
-    -fx-background-color:
-        linear-gradient(#f0ff35, #a9ff00),
-        radial-gradient(center 50% -40%, radius 200%, #b8ee36 45%, #80c800 50%);
-   
+#HboxOff {
+	-fx-background-color: #000000, linear-gradient(#7ebcea, #2f4b8f),
+		linear-gradient(#426ab7, #263e75), linear-gradient(#395cab, #223768);
+	-fx-background-insets: 0, 1, 2, 3;
+	-fx-background-radius: 3, 2, 2, 2;
+	-fx-padding: 12 30 12 30;
+	-fx-text-fill: white;
+	-fx-font-size: 10px;
 }
-#idYt {
+
+#hBoxSlider {
+	-fx-background-color: #000000, linear-gradient(#7ebcea, #2f4b8f),
+		linear-gradient(#426ab7, #263e75), linear-gradient(#395cab, #223768);
+	-fx-background-insets: 0, 1, 2, 3;
+	-fx-background-radius: 3, 2, 2, 2;
+	-fx-padding: 12 30 12 30;
+	-fx-text-fill: white;
+	-fx-font-size: 12px;
+}
+
+#idSearchText {
+	-fx-background-color: #c3c4c4, linear-gradient(#d6d6d6 50%, white 100%),
+		radial-gradient(center 50% -40%, radius 200%, #e6e6e6 45%, rgba(230, 230
+		, 230, 0) 50%);
 	-fx-background-radius: 30;
+	-fx-background-insets: 0, 1, 1;
+	-fx-text-fill: black;
+	-fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.6), 3, 0.0, 0, 1);
+}
+
+#idSearch {
+	-fx-background-radius: 50;
+	-fx-background-color: #c3c4c4, linear-gradient(#d6d6d6 50%, white 100%),
+		radial-gradient(center 50% -40%, radius 200%, #e6e6e6 45%, rgba(230, 230
+		, 230, 0) 50%);
 }

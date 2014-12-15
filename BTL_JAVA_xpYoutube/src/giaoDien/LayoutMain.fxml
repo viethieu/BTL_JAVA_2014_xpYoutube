@@ -15,7 +15,7 @@
          <children>
             <Pane layoutY="-1.0" prefHeight="43.0" prefWidth="600.0" style="-fx-background-color: #d3d3d3;" StackPane.alignment="CENTER">
                <children>
-                  <TextField fx:id="idSearchText" layoutX="338.0" layoutY="8.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="254.0" promptText="film" style="-fx-padding: 0 30 0 30;" />
+                  <TextField fx:id="idSearchText" layoutX="338.0" layoutY="8.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="254.0" promptText="film" style="-fx-padding: 0 40 0 40;" />
                   <MenuBar layoutX="6.0" layoutY="10.0" style="-fx-background-color: #d3d3d3;">
                     <menus>
                       <Menu mnemonicParsing="false" text="File">
@@ -70,12 +70,12 @@
                       </Menu>
                     </menus>
                   </MenuBar>
-                  <ImageView fx:id="idYt" fitHeight="43.0" fitWidth="30.0" layoutX="338.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="idYt" fitHeight="43.0" fitWidth="30.0" layoutX="345.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../image/yt.png" />
+                        <Image url="@../image/youtube.png" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="idSearch" fitHeight="31.0" fitWidth="28.0" layoutX="565.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="idSearch" fitHeight="31.0" fitWidth="28.0" layoutX="558.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../image/search.png" />
                      </image>

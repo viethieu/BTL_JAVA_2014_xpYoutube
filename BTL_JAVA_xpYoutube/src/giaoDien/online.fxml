@@ -44,13 +44,13 @@
             <Region prefHeight="39.0" prefWidth="262.0" HBox.hgrow="ALWAYS" />
             <Pane layoutX="364.0" layoutY="8.0">
                <children>
-                  <TextField fx:id="idTextSearch" prefHeight="31.0" prefWidth="279.0" promptText="film" style="-fx-padding: 0 40 0 40;" />
-                  <ImageView fitHeight="31.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                  <TextField fx:id="idTextSearch" prefHeight="31.0" prefWidth="279.0" promptText="film" style="-fx-padding: 0 50 0 42;" />
+                  <ImageView fitHeight="31.0" fitWidth="40.0" layoutX="7.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../image/yt.png" />
+                        <Image url="@../image/youtube.png" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="idSearch" fitHeight="31.0" fitWidth="40.0" layoutX="250.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="idSearch" fitHeight="28.0" fitWidth="31.0" layoutX="245.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../image/search.png" />
                      </image>
