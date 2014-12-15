@@ -52,13 +52,14 @@ import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import javafx.util.Duration;
 
 public class Controller_Main implements Initializable {
 	private boolean endOfMedia = false;
 	private String str, name;
 	private URL url;
-	public MediaPlayer player;
+	public MediaPlayer player = null;
 	private Duration duration;
 	private double volume;
 	String link = null;
@@ -116,6 +117,14 @@ public class Controller_Main implements Initializable {
 		primaryStage.setScene(scene);
 		primaryStage.show();
 		System.out.println(str2);
+		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+
+			@Override
+			public void handle(WindowEvent arg0) {
+				if (player != null)
+					player.stop();
+			}
+		});
 	}
 
 	/*****************************************************************
@@ -293,6 +302,8 @@ public class Controller_Main implements Initializable {
 			Stage primaryStage = new Stage();
 			primaryStage.setTitle("Imformation");
 			primaryStage.setScene(scene);
+			Image iconSoftWare = new Image("/image/title.png");
+			primaryStage.getIcons().add(iconSoftWare);
 			primaryStage.show();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -423,7 +434,7 @@ public class Controller_Main implements Initializable {
 				} else {
 					player.pause();
 				}
-				if (click.getClickCount() == 2){
+				if (click.getClickCount() == 2) {
 					fullScreen ctl = new fullScreen();
 					ctl.lauch(getNameMeida(name), player.getCurrentTime().toSeconds());
 				}
@@ -669,7 +680,6 @@ public class Controller_Main implements Initializable {
 					idPlay.setText(">");
 				}
 
-
 				name = idMRecent2.getText();
 				Media media = new Media(getNameMeida(name).toString());
 				player = new MediaPlayer(media);
@@ -697,7 +707,6 @@ public class Controller_Main implements Initializable {
 					player.stop();
 					idPlay.setText(">");
 				}
-
 
 				name = idMRecent3.getText();
 				Media media = new Media(getNameMeida(name).toString());
@@ -727,7 +736,6 @@ public class Controller_Main implements Initializable {
 					idPlay.setText(">");
 				}
 
-
 				name = idMRecent4.getText();
 				Media media = new Media(getNameMeida(name).toString());
 				player = new MediaPlayer(media);
@@ -755,7 +763,6 @@ public class Controller_Main implements Initializable {
 					player.stop();
 					idPlay.setText(">");
 				}
-
 
 				name = idMRecent5.getText();
 				Media media = new Media(getNameMeida(name).toString());
@@ -785,7 +792,6 @@ public class Controller_Main implements Initializable {
 					idPlay.setText(">");
 				}
 
-
 				name = idMRecent6.getText();
 				Media media = new Media(getNameMeida(name).toString());
 				player = new MediaPlayer(media);
@@ -813,7 +819,6 @@ public class Controller_Main implements Initializable {
 					player.stop();
 					idPlay.setText(">");
 				}
-
 
 				name = idMRecent7.getText();
 				Media media = new Media(getNameMeida(name).toString());

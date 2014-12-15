@@ -99,16 +99,17 @@ public class Controller_On implements Initializable {
 		if (link != null) {
 			final WebView webView = idWebView;
 			webView.getEngine().loadContent(
-					"<iframe width=\"640\" height=\"380\" src=\"http://www.youtube.com/embed/"
+					"<iframe width=\"1366\" height=\"768\" src=\"http://www.youtube.com/embed/"
 							+ link
 							+ "\" frameborder=\"0\" allowfullscreen></iframe>");
 		}
 
 		primaryStage = new Stage();
 		primaryStage.setTitle(str1);
-		Image iconSoftWare = new Image("/giaodien/iconMovie.png");
+		Image iconSoftWare = new Image("/image/title.png");
 		primaryStage.getIcons().add(iconSoftWare);
 		primaryStage.setScene(scene);
+		primaryStage.setFullScreen(true);
 		primaryStage.show();
 		System.out.println(str2);
 	}
@@ -159,6 +160,8 @@ public class Controller_On implements Initializable {
 					Scene scene = new Scene(root);
 					Stage primaryStage = new Stage();
 					primaryStage.setTitle("About YourTube");
+					Image iconSoftWare = new Image("/image/title.png");
+					primaryStage.getIcons().add(iconSoftWare);
 					primaryStage.setScene(scene);
 					primaryStage.show();
 				} catch (IOException e) {

@@ -45,7 +45,7 @@ public class Controller_Chose implements Initializable {
 	public void launch() {
 		Stage primaryStage = new Stage();
 		primaryStage.setTitle("CHƯƠNNG TRÌNH XEM PHIM");
-		Image iconSoftWare = new Image("/giaodien/iconMovie.png");
+		Image iconSoftWare = new Image("/image/title.png");
 		primaryStage.getIcons().add(iconSoftWare);	
 		primaryStage.setScene(scene);
 		primaryStage.show();

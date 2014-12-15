@@ -112,8 +112,7 @@
                         <Button fx:id="idPlay" mnemonicParsing="false" prefHeight="23.0" prefWidth="44.0" style="-fx-padding: 7 0 7 0;" text="Play" />
                         <Button fx:id="idStop" mnemonicParsing="false" prefHeight="26.0" prefWidth="48.0" style="-fx-padding: 7 0 7 0;" text="Stop" />
                         <Button fx:id="idFullScreen" mnemonicParsing="false" prefHeight="22.0" prefWidth="83.0" style="-fx-padding: 7 0 7 0;" text="Full Screen" />
-                        <Button fx:id="idList" mnemonicParsing="false" prefHeight="24.0" prefWidth="48.0" style="-fx-padding: 7 0 7 0;" text="List" />
-                        <Region prefHeight="35.0" prefWidth="207.0" />
+                        <Region prefHeight="35.0" prefWidth="242.0" />
                         <Label prefHeight="32.0" prefWidth="32.0" text="Vol:" />
                         <Slider fx:id="idVolume" prefHeight="41.0" prefWidth="98.0" />
                         <Region prefHeight="35.0" prefWidth="14.0" />
