@@ -9,7 +9,6 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
 <StackPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="423.0" prefWidth="600.0">
@@ -71,7 +70,7 @@
                       </Menu>
                     </menus>
                   </MenuBar>
-                  <ImageView fitHeight="43.0" fitWidth="30.0" layoutX="338.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="idYt" fitHeight="43.0" fitWidth="30.0" layoutX="338.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../image/yt.png" />
                      </image>
@@ -86,7 +85,7 @@
             </Pane>
             <StackPane layoutY="42.0">
                <children>
-                  <Pane fx:id="idPaneMedia" layoutY="42.0" prefHeight="310.0" prefWidth="600.0" style="-fx-position-shape: true;">
+                  <Pane fx:id="idPaneMedia" layoutY="42.0" prefHeight="310.0" prefWidth="600.0" style="-fx-position-shape: true; -fx-background-color: black;">
                      <children>
                         <MediaView fx:id="idMediaView" fitHeight="300.0" fitWidth="600.0" layoutY="5.0" />
                      </children>
@@ -99,7 +98,7 @@
                      <children>
                         <Label alignment="CENTER" prefHeight="36.0" prefWidth="42.0" text=" Time:" />
                         <Region prefHeight="35.0" prefWidth="32.0" />
-                        <Slider fx:id="idSliderTime" prefHeight="14.0" prefWidth="390.0" style="-fx-padding: 8 0 8 0;" />
+                        <Slider fx:id="idSliderTime" prefHeight="40.0" prefWidth="390.0" style="-fx-padding: 8 0 8 0;" />
                         <Region prefHeight="35.0" prefWidth="22.0" />
                         <Label fx:id="idTime" contentDisplay="CENTER" prefHeight="35.0" prefWidth="87.0" text="--:---/--:--" />
                      </children>
@@ -110,14 +109,13 @@
                <children>
                   <HBox layoutY="388.0" prefHeight="35.0" prefWidth="600.0" style="-fx-background-color: #d3d3d3;">
                      <children>
-                        <Button fx:id="idPlay" mnemonicParsing="false" prefHeight="23.0" prefWidth="44.0" style="-fx-background-color: yellow; -fx-padding: 7 0 7 0;" text="Play" />
+                        <Button fx:id="idPlay" mnemonicParsing="false" prefHeight="23.0" prefWidth="44.0" style="-fx-padding: 7 0 7 0;" text="Play" />
                         <Button fx:id="idStop" mnemonicParsing="false" prefHeight="26.0" prefWidth="48.0" style="-fx-padding: 7 0 7 0;" text="Stop" />
                         <Button fx:id="idFullScreen" mnemonicParsing="false" prefHeight="22.0" prefWidth="83.0" style="-fx-padding: 7 0 7 0;" text="Full Screen" />
                         <Button fx:id="idList" mnemonicParsing="false" prefHeight="24.0" prefWidth="48.0" style="-fx-padding: 7 0 7 0;" text="List" />
-                        <Region prefHeight="35.0" prefWidth="242.0" />
-                        <Button fx:id="idVolumeDown" mnemonicParsing="false" prefHeight="23.0" prefWidth="27.0" style="-fx-padding: 7 0  7 0;" text="-" />
-                        <ProgressIndicator fx:id="idPIn" progress="0.0" />
-                        <Button fx:id="idVolumeUp" mnemonicParsing="false" prefHeight="25.0" prefWidth="28.0" style="-fx-padding: 7 0 7 0;" text="+" />
+                        <Region prefHeight="35.0" prefWidth="207.0" />
+                        <Label prefHeight="32.0" prefWidth="32.0" text="Vol:" />
+                        <Slider fx:id="idVolume" prefHeight="41.0" prefWidth="98.0" />
                         <Region prefHeight="35.0" prefWidth="14.0" />
                         <Button fx:id="idMute" alignment="CENTER" mnemonicParsing="false" style="-fx-padding: 7 9 7 9;" text="x" />
                      </children>

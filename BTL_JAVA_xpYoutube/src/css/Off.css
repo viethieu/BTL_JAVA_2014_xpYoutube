@@ -4,3 +4,6 @@
         radial-gradient(center 50% -40%, radius 200%, #b8ee36 45%, #80c800 50%);
    
 }
+#idYt {
+	-fx-background-radius: 30;
+}

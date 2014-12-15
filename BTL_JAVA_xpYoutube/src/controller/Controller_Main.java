@@ -73,7 +73,7 @@ public class Controller_Main implements Initializable {
 	 * 1. Hàm khởi tạo
 	 * 
 	 **********************************************************/
-	public Controller_Main () {
+	public Controller_Main() {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/giaoDien/layoutMain.fxml"));
 		fxmlLoader.setController(this);
 		try {
@@ -84,7 +84,7 @@ public class Controller_Main implements Initializable {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void launch(String str1, String str2) {
 		if (str2 != null) {
 			URL url = null;
@@ -106,7 +106,7 @@ public class Controller_Main implements Initializable {
 
 			idMediaView.setMediaPlayer(player);
 			player.setVolume(0.5);
-			idPIn.setProgress(0.5);
+			idVolume.setValue(50);
 		}
 		primaryStage = new Stage();
 		primaryStage.setTitle(str1);
@@ -133,22 +133,18 @@ public class Controller_Main implements Initializable {
 	@FXML
 	private Button idStop;
 	@FXML
-	private Button idVolumeDown;
-	@FXML
-	private Button idVolumeUp;
-	@FXML
 	private Button idMute;
-	@FXML
-	private ProgressIndicator idPIn;
 	@FXML
 	private Button idFullScreen;
 	@FXML
 	private Slider idSliderTime;
 	@FXML
+	private Slider idVolume;
+	@FXML
 	private Label idTime;
 	@FXML
 	private Pane idPaneMedia;
-	
+
 	/************************************************************************************
 	 * 
 	 * 3. CONTROL MENU
@@ -184,14 +180,14 @@ public class Controller_Main implements Initializable {
 	private MenuItem idMPlay;
 	@FXML
 	private MenuItem idMPause;
-	
+
 	@FXML
 	private MenuItem idMVolumeDown;
 	@FXML
 	private MenuItem idMVolumeUp;
 	@FXML
 	private MenuItem idMVolumeMute;
-	
+
 	@FXML
 	private MenuItem idMBalance1;
 	@FXML
@@ -202,7 +198,7 @@ public class Controller_Main implements Initializable {
 	private MenuItem idMBalance4;
 	@FXML
 	private MenuItem idMBalance5;
-	
+
 	/**********************************************************************
 	 * 
 	 * khai bao cac ham duoc tao trong sence builder
@@ -239,14 +235,14 @@ public class Controller_Main implements Initializable {
 	private void mVolumeDown() {
 		volume = player.getVolume() - 0.05;
 		player.setVolume(volume);
-		idPIn.setProgress(volume);
+		idVolume.setValue(idVolume.getValue() - 5);
 	}
 
 	@FXML
 	private void mVolumeUp() {
 		volume = player.getVolume() + 0.05;
 		player.setVolume(volume);
-		idPIn.setProgress(volume);
+		idVolume.setValue(idVolume.getValue() + 5);
 	}
 
 	@FXML
@@ -311,7 +307,7 @@ public class Controller_Main implements Initializable {
 	 **********************************************************************************/
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		//sự kiện khi ấn enter
+		// sự kiện khi ấn enter
 		idSearchText.setOnKeyPressed(new EventHandler<KeyEvent>() {
 
 			@Override
@@ -322,7 +318,7 @@ public class Controller_Main implements Initializable {
 					ParseJsonYoutube parser = new ParseJsonYoutube(str);
 					list = parser.ParseYoutube();
 					System.out.println(list);
-					
+
 					Controller_Search ctrl = new Controller_Search(list);
 					if (stageSearch != null)
 						stageSearch.close();
@@ -330,32 +326,34 @@ public class Controller_Main implements Initializable {
 				}
 			}
 		});
-		
+
 		/*****************************************************************************
 		 * 
-		 *5. Lập trình sự kiện cho nút search Xử lý lấy địa chỉ link video ở đây
+		 * 5. Lập trình sự kiện cho nút search Xử lý lấy địa chỉ link video ở
+		 * đây
 		 * 
 		 *****************************************************************************/
 		idSearch.setOnMouseClicked(new EventHandler<Event>() {
 
 			@Override
 			public void handle(Event arg0) {
-				/* Cach lay video tren mang*/
-//				final String MEDIA_URL = "http://download.oracle.com/otndocs/products/javafx/oow2010-2.flv";
-//				pick = new Media(MEDIA_URL);
+				/* Cach lay video tren mang */
+				// final String MEDIA_URL =
+				// "http://download.oracle.com/otndocs/products/javafx/oow2010-2.flv";
+				// pick = new Media(MEDIA_URL);
 
-				/* Cach lay video trong may tinh*/			
-				//str = idSearchText.getText();
-				//str = "/application/" + str + ".mp3";
-				//URL resource = getClass().getResource(str);
-				//pick = new Media(resource.toString());
+				/* Cach lay video trong may tinh */
+				// str = idSearchText.getText();
+				// str = "/application/" + str + ".mp3";
+				// URL resource = getClass().getResource(str);
+				// pick = new Media(resource.toString());
 
-//				player = new MediaPlayer(pick);
-//				idMediaView.setMediaPlayer(player);
-//
-//				player.setVolume(0.5);
-//				idPIn.setProgress(0.5);
-				
+				// player = new MediaPlayer(pick);
+				// idMediaView.setMediaPlayer(player);
+				//
+				// player.setVolume(0.5);
+				// idPIn.setProgress(0.5);
+
 				str = idSearchText.getText();
 				System.out.println(str);
 				ParseJsonYoutube parser = new ParseJsonYoutube(str);
@@ -369,7 +367,7 @@ public class Controller_Main implements Initializable {
 			}
 		});
 
-		//Su kien nut Play/Pause
+		// Su kien nut Play/Pause
 		idPlay.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent arg0) {
@@ -385,7 +383,7 @@ public class Controller_Main implements Initializable {
 				} else {
 					player.pause();
 				}
-				
+
 				player.setOnPaused(new Runnable() {
 					public void run() {
 						idPlay.setText(">");
@@ -407,8 +405,8 @@ public class Controller_Main implements Initializable {
 				});
 			}
 		});
-		
-		//Su kien khi click vao man hinh
+
+		// Su kien khi click vao man hinh
 		idMediaView.setOnMouseClicked(new EventHandler<Event>() {
 
 			@Override
@@ -425,10 +423,10 @@ public class Controller_Main implements Initializable {
 					player.pause();
 				}
 			}
-	
+
 		});
-		
-		//Su kien nut Stop
+
+		// Su kien nut Stop
 		idStop.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
@@ -439,50 +437,48 @@ public class Controller_Main implements Initializable {
 			}
 		});
 
-		//su kien nut thu phong man hinh
+		// su kien nut thu phong man hinh
 		idFullScreen.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
 			public void handle(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-			 
+
 			}
 		});
 
 		// Su kien khi keo thanh thoi gian
-				idSliderTime.valueProperty().addListener(new InvalidationListener() {
+		idSliderTime.valueProperty().addListener(new InvalidationListener() {
 
-					@Override
-					public void invalidated(Observable arg0) {
-						updateTime();
-						if (idSliderTime.isValueChanging()) {
-							player.seek(duration.multiply(idSliderTime.getValue() / 100.0));
-						}
-					}
-				});
+			@Override
+			public void invalidated(Observable arg0) {
+				updateTime();
+				if (idSliderTime.isValueChanging()) {
+					player.seek(duration.multiply(idSliderTime.getValue() / 100.0));
+				}
+			}
+		});
 
 		/******************************************************************************
 		 * 
 		 * 6. Setup Volume
 		 *
 		 ******************************************************************************/
-		idVolumeDown.setOnAction(new EventHandler<ActionEvent>() {
+		idVolume.setOnMousePressed(new EventHandler<Event>() {
 
 			@Override
-			public void handle(ActionEvent arg0) {
-				volume = player.getVolume() - 0.05;
-				player.setVolume(volume);
-				idPIn.setProgress(volume);
+			public void handle(Event arg0) {
+				player.setVolume(idVolume.getValue() / 100);
+				System.out.println(idVolume.getValue());
+
 			}
 		});
-
-		idVolumeUp.setOnAction(new EventHandler<ActionEvent>() {
+		idVolume.setOnMouseMoved(new EventHandler<Event>() {
 
 			@Override
-			public void handle(ActionEvent arg0) {
-				volume = player.getVolume() + 0.05;
-				player.setVolume(volume);
-				idPIn.setProgress(volume);
+			public void handle(Event arg0) {
+				player.setVolume(idVolume.getValue() / 100);
+				System.out.println(idVolume.getValue());
 			}
 		});
 
@@ -497,34 +493,34 @@ public class Controller_Main implements Initializable {
 					player.setMute(true);
 			}
 		});
-		
+
 		idMOpen.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
 			public void handle(ActionEvent event) {
-		
+
 				final FileChooser fileChooser = new FileChooser();
 				Stage stage = new Stage();
 				File file = fileChooser.showOpenDialog(stage);
 				name = file.getAbsolutePath();
-				
+
 				if (file != null) {
 					try {
 						File filename = new File("log_offline.txt");
 						FileWriter fw = new FileWriter(filename, true);
 						fw.write(name + "\n");// appends the
-																// string to the
-																// file
+												// string to the
+												// file
 						fw.close();
 					} catch (IOException ioe) {
 						System.err.println("IOException: " + ioe.getMessage());
 					}
-					
+
 					if (player != null) {
 						player.stop();
 						idPlay.setText(">");
 					}
-					
+
 					Media media = new Media(getNameMeida(name).toString());
 					player = new MediaPlayer(media);
 
@@ -538,14 +534,13 @@ public class Controller_Main implements Initializable {
 
 					idMediaView.setMediaPlayer(player);
 					player.setVolume(0.5);
-					idPIn.setProgress(0.5);
+					idVolume.setValue(50);
 				}
 			}
 		});
 
-
 		idMRecent.setOnShowing(new EventHandler<Event>() {
-			
+
 			@Override
 			public void handle(Event arg0) {
 				BufferedReader br = null;
@@ -629,7 +624,7 @@ public class Controller_Main implements Initializable {
 					idMRecent6.setText(lines.get(size - 6));
 					idMRecent7.setText(lines.get(size - 7));
 				}
-				
+
 			}
 		});
 
@@ -641,7 +636,7 @@ public class Controller_Main implements Initializable {
 					player.stop();
 					idPlay.setText(">");
 				}
-				
+
 				Media media = new Media(getNameMeida(idMRecent1.getText()).toString());
 				player = new MediaPlayer(media);
 
@@ -655,7 +650,7 @@ public class Controller_Main implements Initializable {
 
 				idMediaView.setMediaPlayer(player);
 				player.setVolume(0.5);
-				idPIn.setProgress(0.5);
+				idVolume.setValue(50);
 
 				// ctrl.launch("Test", "file:///" + file.getAbsolutePath());
 			}
@@ -668,7 +663,7 @@ public class Controller_Main implements Initializable {
 					player.stop();
 					idPlay.setText(">");
 				}
-				
+
 				Media media = new Media(getNameMeida(idMRecent2.getText()).toString());
 				player = new MediaPlayer(media);
 
@@ -682,7 +677,7 @@ public class Controller_Main implements Initializable {
 
 				idMediaView.setMediaPlayer(player);
 				player.setVolume(0.5);
-				idPIn.setProgress(0.5);
+				idVolume.setValue(50);
 
 				// ctrl.launch("Test", "file:///" + file.getAbsolutePath());
 			}
@@ -695,7 +690,7 @@ public class Controller_Main implements Initializable {
 					player.stop();
 					idPlay.setText(">");
 				}
-				
+
 				Media media = new Media(getNameMeida(idMRecent3.getText()).toString());
 				player = new MediaPlayer(media);
 
@@ -709,7 +704,7 @@ public class Controller_Main implements Initializable {
 
 				idMediaView.setMediaPlayer(player);
 				player.setVolume(0.5);
-				idPIn.setProgress(0.5);
+				idVolume.setValue(50);
 
 				// ctrl.launch("Test", "file:///" + file.getAbsolutePath());
 			}
@@ -722,7 +717,7 @@ public class Controller_Main implements Initializable {
 					player.stop();
 					idPlay.setText(">");
 				}
-				
+
 				Media media = new Media(getNameMeida(idMRecent4.getText()).toString());
 				player = new MediaPlayer(media);
 
@@ -736,7 +731,7 @@ public class Controller_Main implements Initializable {
 
 				idMediaView.setMediaPlayer(player);
 				player.setVolume(0.5);
-				idPIn.setProgress(0.5);
+				idVolume.setValue(50);
 
 				// ctrl.launch("Test", "file:///" + file.getAbsolutePath());
 			}
@@ -749,7 +744,7 @@ public class Controller_Main implements Initializable {
 					player.stop();
 					idPlay.setText(">");
 				}
-				
+
 				Media media = new Media(getNameMeida(idMRecent5.getText()).toString());
 				player = new MediaPlayer(media);
 
@@ -763,7 +758,7 @@ public class Controller_Main implements Initializable {
 
 				idMediaView.setMediaPlayer(player);
 				player.setVolume(0.5);
-				idPIn.setProgress(0.5);
+				idVolume.setValue(50);
 
 				// ctrl.launch("Test", "file:///" + file.getAbsolutePath());
 			}
@@ -776,7 +771,7 @@ public class Controller_Main implements Initializable {
 					player.stop();
 					idPlay.setText(">");
 				}
-				
+
 				Media media = new Media(getNameMeida(idMRecent6.getText()).toString());
 				player = new MediaPlayer(media);
 
@@ -790,7 +785,7 @@ public class Controller_Main implements Initializable {
 
 				idMediaView.setMediaPlayer(player);
 				player.setVolume(0.5);
-				idPIn.setProgress(0.5);
+				idVolume.setValue(50);
 
 				// ctrl.launch("Test", "file:///" + file.getAbsolutePath());
 			}
@@ -803,7 +798,7 @@ public class Controller_Main implements Initializable {
 					player.stop();
 					idPlay.setText(">");
 				}
-				
+
 				Media media = new Media(getNameMeida(idMRecent7.getText()).toString());
 				player = new MediaPlayer(media);
 
@@ -817,12 +812,11 @@ public class Controller_Main implements Initializable {
 
 				idMediaView.setMediaPlayer(player);
 				player.setVolume(0.5);
-				idPIn.setProgress(0.5);
+				idVolume.setValue(50);
 
 				// ctrl.launch("Test", "file:///" + file.getAbsolutePath());
 			}
 		});
-		
 
 	}
 
@@ -868,12 +862,12 @@ public class Controller_Main implements Initializable {
 		else
 			return String.format("%02d:%02d/%02d:%02d", intCountM, intCountS, intLengthM, intLengthS);
 	}
-	
-	private URL getNameMeida (String name) {
+
+	private URL getNameMeida(String name) {
 		String fix = "file:///" + name.replaceAll(" ", "%20");
-		int cuoi= name.lastIndexOf(".");
-		int dau= name.lastIndexOf("\\");
-		String title= name.substring(dau+1, cuoi);
+		int cuoi = name.lastIndexOf(".");
+		int dau = name.lastIndexOf("\\");
+		String title = name.substring(dau + 1, cuoi);
 		primaryStage.setTitle(title + " - Xem phim Offline");
 		try {
 			url = new URL(fix);
