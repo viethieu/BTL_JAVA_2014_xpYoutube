@@ -82,12 +82,14 @@ public class Controller_Main implements Initializable {
 	 * 
 	 **********************************************************/
 	public Controller_Main() {
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/giaoDien/layoutMain.fxml"));
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(
+				"/giaoDien/layoutMain.fxml"));
 		fxmlLoader.setController(this);
 		try {
 			pane = fxmlLoader.load();
 			scene = new Scene(pane);
-			scene.getStylesheets().add(getClass().getResource("/css/Off.css").toExternalForm());
+			scene.getStylesheets().add(
+					getClass().getResource("/css/Off.css").toExternalForm());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -107,8 +109,10 @@ public class Controller_Main implements Initializable {
 			final DoubleProperty width = idMediaView.fitWidthProperty();
 			final DoubleProperty height = idMediaView.fitHeightProperty();
 
-			width.bind(Bindings.selectDouble(idMediaView.sceneProperty(), "width"));
-			height.bind(Bindings.selectDouble(idMediaView.sceneProperty(), "height"));
+			width.bind(Bindings.selectDouble(idMediaView.sceneProperty(),
+					"width"));
+			height.bind(Bindings.selectDouble(idMediaView.sceneProperty(),
+					"height"));
 
 			idMediaView.setPreserveRatio(true);
 
@@ -263,11 +267,10 @@ public class Controller_Main implements Initializable {
 
 	@FXML
 	private void mVolumeMute() {
-		if (player.isMute() == true){
+		if (player.isMute() == true) {
 			player.setMute(false);
 			idMute.setImage(image4);
-		}
-		else {
+		} else {
 			player.setMute(true);
 			idMute.setImage(image3);
 		}
@@ -307,7 +310,8 @@ public class Controller_Main implements Initializable {
 	private void mAboutTeam() {
 		AnchorPane root;
 		try {
-			root = FXMLLoader.load(getClass().getResource("/giaoDien/Team.fxml"));
+			root = FXMLLoader.load(getClass()
+					.getResource("/giaoDien/Team.fxml"));
 			Scene scene = new Scene(root);
 			Stage primaryStage = new Stage();
 			primaryStage.setTitle("Imformation");
@@ -401,7 +405,8 @@ public class Controller_Main implements Initializable {
 					return;
 				}
 
-				if (status == Status.PAUSED || status == Status.READY || status == Status.STOPPED) {
+				if (status == Status.PAUSED || status == Status.READY
+						|| status == Status.STOPPED) {
 					player.play();
 
 					player.setCycleCount(10);
@@ -423,11 +428,12 @@ public class Controller_Main implements Initializable {
 
 				// lap trinh cho thoi gian chay khi xem phim
 				duration = player.getMedia().getDuration();
-				player.currentTimeProperty().addListener(new InvalidationListener() {
-					public void invalidated(Observable ov) {
-						updateTime();
-					}
-				});
+				player.currentTimeProperty().addListener(
+						new InvalidationListener() {
+							public void invalidated(Observable ov) {
+								updateTime();
+							}
+						});
 			}
 		});
 
@@ -437,7 +443,8 @@ public class Controller_Main implements Initializable {
 			@Override
 			public void handle(MouseEvent click) {
 				Status status = player.getStatus();
-				if (status == Status.PAUSED || status == Status.READY || status == Status.STOPPED) {
+				if (status == Status.PAUSED || status == Status.READY
+						|| status == Status.STOPPED) {
 					if (endOfMedia) {
 						player.seek(player.getStartTime()); // lấy thời gian tại
 															// lúc dừng
@@ -449,7 +456,8 @@ public class Controller_Main implements Initializable {
 				}
 				if (click.getClickCount() == 2) {
 					fullScreen ctl = new fullScreen();
-					ctl.lauch(getNameMeida(name), player.getCurrentTime().toSeconds());
+					ctl.lauch(getNameMeida(name), player.getCurrentTime()
+							.toSeconds());
 				}
 			}
 
@@ -463,17 +471,18 @@ public class Controller_Main implements Initializable {
 				// TODO Auto-generated method stub
 				player.stop();
 				idPlay.setImage(image1);
-				
+
 			}
 		});
-		
+
 		// su kien nut thu phong man hinh
 		idFullScreen.setOnMouseClicked(new EventHandler<Event>() {
 
 			@Override
 			public void handle(Event arg0) {
 				fullScreen ctl = new fullScreen();
-				ctl.lauch(getNameMeida(name), player.getCurrentTime().toSeconds());
+				ctl.lauch(getNameMeida(name), player.getCurrentTime()
+						.toSeconds());
 			}
 		});
 
@@ -520,8 +529,7 @@ public class Controller_Main implements Initializable {
 				if (player.isMute() == true) {
 					player.setMute(false);
 					idMute.setImage(image4);
-				}
-				else {
+				} else {
 					player.setMute(true);
 					idMute.setImage(image3);
 				}
@@ -559,10 +567,13 @@ public class Controller_Main implements Initializable {
 					player = new MediaPlayer(media);
 
 					final DoubleProperty width = idMediaView.fitWidthProperty();
-					final DoubleProperty height = idMediaView.fitHeightProperty();
+					final DoubleProperty height = idMediaView
+							.fitHeightProperty();
 
-					width.bind(Bindings.selectDouble(idMediaView.sceneProperty(), "width"));
-					height.bind(Bindings.selectDouble(idMediaView.sceneProperty(), "height"));
+					width.bind(Bindings.selectDouble(
+							idMediaView.sceneProperty(), "width"));
+					height.bind(Bindings.selectDouble(
+							idMediaView.sceneProperty(), "height"));
 
 					idMediaView.setPreserveRatio(true);
 
@@ -674,11 +685,22 @@ public class Controller_Main implements Initializable {
 				Media media = new Media(getNameMeida(name).toString());
 				player = new MediaPlayer(media);
 
+				FileWriter fw;
+				try {
+					fw = new FileWriter("log_offline.txt", true);
+					fw.write(idMRecent1.getText() + "\n");
+					fw.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+
 				final DoubleProperty width = idMediaView.fitWidthProperty();
 				final DoubleProperty height = idMediaView.fitHeightProperty();
 
-				width.bind(Bindings.selectDouble(idMediaView.sceneProperty(), "width"));
-				height.bind(Bindings.selectDouble(idMediaView.sceneProperty(), "height"));
+				width.bind(Bindings.selectDouble(idMediaView.sceneProperty(),
+						"width"));
+				height.bind(Bindings.selectDouble(idMediaView.sceneProperty(),
+						"height"));
 
 				idMediaView.setPreserveRatio(true);
 
@@ -702,11 +724,22 @@ public class Controller_Main implements Initializable {
 				Media media = new Media(getNameMeida(name).toString());
 				player = new MediaPlayer(media);
 
+				FileWriter fw;
+				try {
+					fw = new FileWriter("log_offline.txt", true);
+					fw.write(idMRecent2.getText() + "\n");
+					fw.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				
 				final DoubleProperty width = idMediaView.fitWidthProperty();
 				final DoubleProperty height = idMediaView.fitHeightProperty();
 
-				width.bind(Bindings.selectDouble(idMediaView.sceneProperty(), "width"));
-				height.bind(Bindings.selectDouble(idMediaView.sceneProperty(), "height"));
+				width.bind(Bindings.selectDouble(idMediaView.sceneProperty(),
+						"width"));
+				height.bind(Bindings.selectDouble(idMediaView.sceneProperty(),
+						"height"));
 
 				idMediaView.setPreserveRatio(true);
 
@@ -730,11 +763,22 @@ public class Controller_Main implements Initializable {
 				Media media = new Media(getNameMeida(name).toString());
 				player = new MediaPlayer(media);
 
+				FileWriter fw;
+				try {
+					fw = new FileWriter("log_offline.txt", true);
+					fw.write(idMRecent3.getText() + "\n");
+					fw.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				
 				final DoubleProperty width = idMediaView.fitWidthProperty();
 				final DoubleProperty height = idMediaView.fitHeightProperty();
 
-				width.bind(Bindings.selectDouble(idMediaView.sceneProperty(), "width"));
-				height.bind(Bindings.selectDouble(idMediaView.sceneProperty(), "height"));
+				width.bind(Bindings.selectDouble(idMediaView.sceneProperty(),
+						"width"));
+				height.bind(Bindings.selectDouble(idMediaView.sceneProperty(),
+						"height"));
 
 				idMediaView.setPreserveRatio(true);
 
@@ -758,11 +802,22 @@ public class Controller_Main implements Initializable {
 				Media media = new Media(getNameMeida(name).toString());
 				player = new MediaPlayer(media);
 
+				FileWriter fw;
+				try {
+					fw = new FileWriter("log_offline.txt", true);
+					fw.write(idMRecent4.getText() + "\n");
+					fw.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				
 				final DoubleProperty width = idMediaView.fitWidthProperty();
 				final DoubleProperty height = idMediaView.fitHeightProperty();
 
-				width.bind(Bindings.selectDouble(idMediaView.sceneProperty(), "width"));
-				height.bind(Bindings.selectDouble(idMediaView.sceneProperty(), "height"));
+				width.bind(Bindings.selectDouble(idMediaView.sceneProperty(),
+						"width"));
+				height.bind(Bindings.selectDouble(idMediaView.sceneProperty(),
+						"height"));
 
 				idMediaView.setPreserveRatio(true);
 
@@ -786,11 +841,22 @@ public class Controller_Main implements Initializable {
 				Media media = new Media(getNameMeida(name).toString());
 				player = new MediaPlayer(media);
 
+				FileWriter fw;
+				try {
+					fw = new FileWriter("log_offline.txt", true);
+					fw.write(idMRecent5.getText() + "\n");
+					fw.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				
 				final DoubleProperty width = idMediaView.fitWidthProperty();
 				final DoubleProperty height = idMediaView.fitHeightProperty();
 
-				width.bind(Bindings.selectDouble(idMediaView.sceneProperty(), "width"));
-				height.bind(Bindings.selectDouble(idMediaView.sceneProperty(), "height"));
+				width.bind(Bindings.selectDouble(idMediaView.sceneProperty(),
+						"width"));
+				height.bind(Bindings.selectDouble(idMediaView.sceneProperty(),
+						"height"));
 
 				idMediaView.setPreserveRatio(true);
 
@@ -814,11 +880,22 @@ public class Controller_Main implements Initializable {
 				Media media = new Media(getNameMeida(name).toString());
 				player = new MediaPlayer(media);
 
+				FileWriter fw;
+				try {
+					fw = new FileWriter("log_offline.txt", true);
+					fw.write(idMRecent6.getText() + "\n");
+					fw.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				
 				final DoubleProperty width = idMediaView.fitWidthProperty();
 				final DoubleProperty height = idMediaView.fitHeightProperty();
 
-				width.bind(Bindings.selectDouble(idMediaView.sceneProperty(), "width"));
-				height.bind(Bindings.selectDouble(idMediaView.sceneProperty(), "height"));
+				width.bind(Bindings.selectDouble(idMediaView.sceneProperty(),
+						"width"));
+				height.bind(Bindings.selectDouble(idMediaView.sceneProperty(),
+						"height"));
 
 				idMediaView.setPreserveRatio(true);
 
@@ -842,11 +919,22 @@ public class Controller_Main implements Initializable {
 				Media media = new Media(getNameMeida(name).toString());
 				player = new MediaPlayer(media);
 
+				FileWriter fw;
+				try {
+					fw = new FileWriter("log_offline.txt", true);
+					fw.write(idMRecent7.getText() + "\n");
+					fw.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				
 				final DoubleProperty width = idMediaView.fitWidthProperty();
 				final DoubleProperty height = idMediaView.fitHeightProperty();
 
-				width.bind(Bindings.selectDouble(idMediaView.sceneProperty(), "width"));
-				height.bind(Bindings.selectDouble(idMediaView.sceneProperty(), "height"));
+				width.bind(Bindings.selectDouble(idMediaView.sceneProperty(),
+						"width"));
+				height.bind(Bindings.selectDouble(idMediaView.sceneProperty(),
+						"height"));
 
 				idMediaView.setPreserveRatio(true);
 
@@ -857,19 +945,20 @@ public class Controller_Main implements Initializable {
 				// ctrl.launch("Test", "file:///" + file.getAbsolutePath());
 			}
 		});
-		
+
 		idMClearRecent.setOnAction(new EventHandler<ActionEvent>() {
-			
+
 			@Override
 			public void handle(ActionEvent arg0) {
 				// TODO Auto-generated method stub
 				try {
-					PrintWriter out= new PrintWriter(new FileWriter("log_offline.txt"));
+					PrintWriter out = new PrintWriter(new FileWriter(
+							"log_offline.txt"));
 					out.print("");
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-				
+
 				size = 0;
 				idMRecent1.setVisible(false);
 				idMRecent2.setVisible(false);
@@ -899,9 +988,11 @@ public class Controller_Main implements Initializable {
 					Duration currentTime = player.getCurrentTime();
 					idTime.setText(setLabelTime(currentTime, duration));
 					idSliderTime.setDisable(duration.isUnknown());
-					if (!idSliderTime.isDisable() && duration.greaterThan(Duration.ZERO)
+					if (!idSliderTime.isDisable()
+							&& duration.greaterThan(Duration.ZERO)
 							&& !idSliderTime.isValueChanging()) {
-						idSliderTime.setValue(currentTime.divide(duration).toMillis() * 100);
+						idSliderTime.setValue(currentTime.divide(duration)
+								.toMillis() * 100);
 					}
 				}
 			});
@@ -920,10 +1011,11 @@ public class Controller_Main implements Initializable {
 		int intLengthS = intLength - intLengthH * 3600 - intLengthM * 60;
 
 		if (intLengthH > 0)
-			return String.format("%02d:%02d:%02d/%02d:%02d:%02d", intCountH, intCountM, intCountS, intLengthH,
-					intLengthM, intLengthS);
+			return String.format("%02d:%02d:%02d/%02d:%02d:%02d", intCountH,
+					intCountM, intCountS, intLengthH, intLengthM, intLengthS);
 		else
-			return String.format("%02d:%02d/%02d:%02d", intCountM, intCountS, intLengthM, intLengthS);
+			return String.format("%02d:%02d/%02d:%02d", intCountM, intCountS,
+					intLengthM, intLengthS);
 	}
 
 	private URL getNameMeida(String name) {
